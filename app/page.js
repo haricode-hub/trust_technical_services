@@ -143,37 +143,41 @@ export default function HomePage() {
       </section>
 
       {/* Key Highlights Section */}
-      <section className="py-20 bg-muted/20">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">
             Our Core Services
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
-              <Card key={service.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
-                <div className="aspect-video overflow-hidden rounded-t-lg">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+              <Card key={service.id} className="group hover:shadow-2xl transition-all duration-300 border border-gray-700 shadow-lg bg-gray-800 text-white">
+                <div className="grid grid-cols-3 gap-1 aspect-video rounded-t-lg overflow-hidden">
+                  {service.images.map((image, index) => (
+                    <div key={index} className="relative overflow-hidden">
+                      <img 
+                        src={image} 
+                        alt={`${service.title} ${index + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ))}
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-xl text-blue-900">{service.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground">
+                  <CardTitle className="text-xl text-orange-400">{service.title}</CardTitle>
+                  <CardDescription className="text-gray-300">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
                     {service.features.slice(0, 2).map((feature, index) => (
-                      <li key={index} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
+                      <li key={index} className="flex items-center text-sm text-gray-300">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-                  <Badge variant="secondary" className="mt-4 bg-blue-100 text-blue-800">
+                  <Badge variant="secondary" className="mt-4 bg-orange-500/20 text-orange-300 border-orange-500/30">
                     Professional Service
                   </Badge>
                 </CardContent>
