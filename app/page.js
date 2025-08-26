@@ -439,31 +439,31 @@ function ContactPage() {
   return (
     <div className="pt-20">
       {/* Contact Hero */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-blue-100">
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-blue-900 mb-6">Get In Touch</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold text-white mb-6">Get In Touch</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Ready to discuss your electrical safety, electronics design, or fire safety testing needs? Contact our expert team today.
           </p>
         </div>
       </section>
 
       {/* Contact Content */}
-      <section className="py-20">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-gray-700 shadow-lg bg-gray-800">
               <CardHeader>
-                <CardTitle className="text-2xl text-blue-900">Send Us a Message</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl text-orange-400">Send Us a Message</CardTitle>
+                <CardDescription className="text-gray-300">
                   Fill out the form below and we'll get back to you within 24 hours.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
                       Name *
                     </label>
                     <Input
@@ -473,10 +473,11 @@ function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="Your full name"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
+                    <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
                       Email *
                     </label>
                     <Input
@@ -487,10 +488,11 @@ function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="your.email@example.com"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
+                    <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
                       Message *
                     </label>
                     <Textarea
@@ -500,10 +502,10 @@ function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="Tell us about your project or requirements..."
-                      className="min-h-[120px]"
+                      className="min-h-[120px] bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
                     />
                   </div>
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white">
                     Send Message
                   </Button>
                 </form>
@@ -512,52 +514,52 @@ function ContactPage() {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <Card className="border-0 shadow-lg">
+              <Card className="border border-gray-700 shadow-lg bg-gray-800">
                 <CardHeader>
-                  <CardTitle className="text-2xl text-blue-900">Contact Information</CardTitle>
+                  <CardTitle className="text-2xl text-orange-400">Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-start space-x-4">
                     <Phone className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-foreground">Phone</h3>
-                      <p className="text-muted-foreground">+64 (09) 123-4567</p>
+                      <h3 className="font-semibold text-white">Phone</h3>
+                      <p className="text-gray-300">+64 (09) 123-4567</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
                     <Mail className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-foreground">Email</h3>
-                      <p className="text-muted-foreground">info@trusttechnical.co.nz</p>
+                      <h3 className="font-semibold text-white">Email</h3>
+                      <p className="text-gray-300">info@trusttechnical.co.nz</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
                     <MapPin className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-foreground">Location</h3>
-                      <p className="text-muted-foreground">Auckland, New Zealand</p>
+                      <h3 className="font-semibold text-white">Location</h3>
+                      <p className="text-gray-300">Auckland, New Zealand</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-lg">
+              <Card className="border border-gray-700 shadow-lg bg-gray-800">
                 <CardHeader>
-                  <CardTitle className="text-xl text-blue-900">Business Hours</CardTitle>
+                  <CardTitle className="text-xl text-orange-400">Business Hours</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-foreground">Monday - Friday</span>
-                      <span className="text-muted-foreground">8:00 AM - 6:00 PM</span>
+                      <span className="text-white">Monday - Friday</span>
+                      <span className="text-gray-300">8:00 AM - 6:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-foreground">Saturday</span>
-                      <span className="text-muted-foreground">9:00 AM - 4:00 PM</span>
+                      <span className="text-white">Saturday</span>
+                      <span className="text-gray-300">9:00 AM - 4:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-foreground">Sunday</span>
-                      <span className="text-muted-foreground">Closed</span>
+                      <span className="text-white">Sunday</span>
+                      <span className="text-gray-300">Closed</span>
                     </div>
                   </div>
                 </CardContent>
