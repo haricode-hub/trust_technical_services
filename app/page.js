@@ -95,9 +95,9 @@ export default function HomePage() {
       {/* Hero Section */}
       <section 
         id="home" 
-        className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700"
+        className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800"
         style={{
-          backgroundImage: `linear-gradient(rgba(30, 58, 138, 0.8), rgba(37, 99, 235, 0.7)), url('https://images.unsplash.com/photo-1651340527836-263c5072968e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxlbGVjdHJvbmljcyUyMHRlc3Rpbmd8ZW58MHx8fGJsdWV8MTc1NjIyNzM5OHww&ixlib=rb-4.1.0&q=85')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1651340527836-263c5072968e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxlbGVjdHJvbmljcyUyMHRlc3Rpbmd8ZW58MHx8fGJsdWV8MTc1NjIyNzM5OHww&ixlib=rb-4.1.0&q=85')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
