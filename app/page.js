@@ -363,30 +363,12 @@ function ServicesPage({ services }) {
                   </Button>
                 </div>
                 <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                  <div className="grid grid-cols-2 gap-4 rounded-lg overflow-hidden">
-                    <div className="aspect-square rounded-lg overflow-hidden">
-                      <img 
-                        src={service.images[0]} 
-                        alt={`${service.title} 1`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="space-y-4">
-                      <div className="aspect-square rounded-lg overflow-hidden">
-                        <img 
-                          src={service.images[1]} 
-                          alt={`${service.title} 2`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <div className="aspect-square rounded-lg overflow-hidden">
-                        <img 
-                          src={service.images[2]} 
-                          alt={`${service.title} 3`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    </div>
+                  <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                 </div>
               </div>
