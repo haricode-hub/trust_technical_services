@@ -139,16 +139,12 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service) => (
               <Card key={service.id} className="group hover:shadow-2xl transition-all duration-300 border border-gray-700 shadow-lg bg-gray-800 text-white">
-                <div className="grid grid-cols-3 gap-1 aspect-video rounded-t-lg overflow-hidden">
-                  {service.images.map((image, index) => (
-                    <div key={index} className="relative overflow-hidden">
-                      <img 
-                        src={image} 
-                        alt={`${service.title} ${index + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
+                <div className="aspect-video overflow-hidden rounded-t-lg">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl text-orange-400">{service.title}</CardTitle>
