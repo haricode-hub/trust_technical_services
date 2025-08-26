@@ -574,7 +574,7 @@ function ContactPage() {
 
 function Footer({ onNavigate }) {
   return (
-    <footer className="bg-slate-900 text-white py-16">
+    <footer className="bg-gray-900 text-white py-16 border-t border-gray-700">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
@@ -582,19 +582,19 @@ function Footer({ onNavigate }) {
               <Wrench className="h-6 w-6 text-orange-500" />
               <span className="text-lg font-bold">Trust Technical Services</span>
             </div>
-            <p className="text-slate-400 text-sm">
+            <p className="text-gray-400 text-sm">
               Your trusted partner in safety and electronics innovation across New Zealand.
             </p>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4 text-orange-400">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               {['Home', 'About', 'Services', 'Contact'].map((item) => (
                 <li key={item}>
                   <button 
                     onClick={() => onNavigate(item.toLowerCase())}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
                     {item}
                   </button>
@@ -604,8 +604,8 @@ function Footer({ onNavigate }) {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm text-slate-400">
+            <h3 className="font-semibold mb-4 text-orange-400">Services</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
               <li>Test & Tag Services</li>
               <li>Electronics Design</li>
               <li>Fire & Safety Testing</li>
@@ -614,8 +614,8 @@ function Footer({ onNavigate }) {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <div className="space-y-2 text-sm text-slate-400">
+            <h3 className="font-semibold mb-4 text-orange-400">Contact</h3>
+            <div className="space-y-2 text-sm text-gray-400">
               <p>+64 (09) 123-4567</p>
               <p>info@trusttechnical.co.nz</p>
               <p>Auckland, New Zealand</p>
@@ -623,16 +623,16 @@ function Footer({ onNavigate }) {
           </div>
         </div>
         
-        <div className="border-t border-slate-800 mt-12 pt-8 text-center">
+        <div className="border-t border-gray-700 mt-12 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-gray-400">
               © 2024 Trust Technical Services. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <button className="text-sm text-slate-400 hover:text-white transition-colors">
+              <button className="text-sm text-gray-400 hover:text-white transition-colors">
                 Privacy Policy
               </button>
-              <button className="text-sm text-slate-400 hover:text-white transition-colors">
+              <button className="text-sm text-gray-400 hover:text-white transition-colors">
                 Legal Notice
               </button>
             </div>
