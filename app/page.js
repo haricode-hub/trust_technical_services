@@ -348,43 +348,61 @@ function ServicesPage({ services }) {
   return (
     <div className="pt-20">
       {/* Services Hero */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-blue-100">
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-blue-900 mb-6">Our Professional Services</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold text-white mb-6">Our Professional Services</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Comprehensive technical solutions for electrical safety, electronics design, and fire safety compliance across New Zealand.
           </p>
         </div>
       </section>
 
       {/* Detailed Services */}
-      <section className="py-20">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="space-y-20">
             {services.map((service, index) => (
               <div key={service.id} className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
                 <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-                  <h2 className="text-3xl font-bold text-blue-900 mb-4">{service.title}</h2>
-                  <p className="text-lg text-muted-foreground mb-6">{service.description}</p>
+                  <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
+                  <p className="text-lg text-gray-300 mb-6">{service.description}</p>
                   <ul className="space-y-3">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-muted-foreground">{feature}</span>
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button className="mt-6 bg-blue-600 hover:bg-blue-700">
+                  <Button className="mt-6 bg-orange-500 hover:bg-orange-600 text-white">
                     Learn More
                   </Button>
                 </div>
                 <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                  <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="grid grid-cols-2 gap-4 rounded-lg overflow-hidden">
+                    <div className="aspect-square rounded-lg overflow-hidden">
+                      <img 
+                        src={service.images[0]} 
+                        alt={`${service.title} 1`}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <div className="aspect-square rounded-lg overflow-hidden">
+                        <img 
+                          src={service.images[1]} 
+                          alt={`${service.title} 2`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="aspect-square rounded-lg overflow-hidden">
+                        <img 
+                          src={service.images[2]} 
+                          alt={`${service.title} 3`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
