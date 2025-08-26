@@ -188,9 +188,9 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">
             Why Choose Trust Technical Services
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -199,8 +199,8 @@ export default function HomePage() {
                 <div className="flex justify-center mb-6">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-semibold mb-4 text-foreground">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-2xl font-semibold mb-4 text-white">{feature.title}</h3>
+                <p className="text-gray-300 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -210,12 +210,12 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-900 text-white">
+      <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">
             Ready to Ensure Your Equipment's Safety?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
             Get professional electrical testing, innovative electronics design, and comprehensive safety solutions from New Zealand's trusted technical experts.
           </p>
           <Button 
