@@ -21,21 +21,33 @@ export default function HomePage() {
       id: 'test-tag',
       title: 'Test & Tag Services',
       description: 'Comprehensive electrical safety testing and compliance certification for appliances and equipment.',
-      image: 'https://images.unsplash.com/photo-1723536998172-9805f991916f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+      images: [
+        'https://images.unsplash.com/photo-1723536998172-9805f991916f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400',
+        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400'
+      ],
       features: ['Single-phase & three-phase testing', 'RCD functionality checks', 'Compliance certification', 'Detailed reporting']
     },
     {
       id: 'electronics',
       title: 'Electronics Design',
       description: 'Professional PCB design, embedded systems development, and hardware prototyping solutions.',
-      image: 'https://images.unsplash.com/photo-1560165143-fa7e2d9e594c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxQQ0IlMjBkZXNpZ258ZW58MHx8fHwxNzU2MjI3NDU5fDA&ixlib=rb-4.1.0&q=85',
+      images: [
+        'https://images.unsplash.com/photo-1560165143-fa7e2d9e594c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxQQ0IlMjBkZXNpZ258ZW58MHx8fHwxNzU2MjI3NDU5fDA&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400',
+        'https://images.unsplash.com/photo-1629654291663-b91ad427698f?w=400'
+      ],
       features: ['PCB design (digital & analog)', 'Microcontroller integration', 'Embedded hardware prototyping', 'IPC/RoHS/UL compliance']
     },
     {
       id: 'fire-safety',
       title: 'Fire & Safety Testing',
       description: 'Specialized testing for fire safety equipment, microwave leakage detection, and safety system inspections.',
-      image: 'https://images.unsplash.com/photo-1595306394931-b35768661692?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxmaXJlJTIwc2FmZXR5fGVufDB8fHx8MTc1NjIyNzQ2NXww&ixlib=rb-4.1.0&q=85',
+      images: [
+        'https://images.unsplash.com/photo-1595306394931-b35768661692?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxmaXJlJTIwc2FmZXR5fGVufDB8fHx8MTc1NjIyNzQ2NXww&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',
+        'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400'
+      ],
       features: ['Microwave leakage testing', 'Fire extinguisher inspections', 'Hydrant system checks', 'Safety compliance audits']
     }
   ]
