@@ -274,11 +274,11 @@ function AboutPage() {
   return (
     <div className="pt-20">
       {/* About Hero */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-blue-100">
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-blue-900 mb-6">About Trust Technical Services</h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h1 className="text-5xl font-bold text-white mb-6">About Trust Technical Services</h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Bridging education, innovation, and safety through electronics and comprehensive technical solutions across New Zealand.
             </p>
           </div>
@@ -286,32 +286,32 @@ function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20">
+      <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-gray-700 shadow-lg bg-gray-800 text-white">
               <CardHeader>
-                <CardTitle className="text-2xl text-blue-900 flex items-center">
+                <CardTitle className="text-2xl text-orange-400 flex items-center">
                   <Shield className="h-6 w-6 mr-2" />
                   Our Mission
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   To deliver safe, compliant, and cutting-edge technical solutions while nurturing industry talent and ensuring the highest standards of electrical safety and innovation across New Zealand's manufacturing and business sectors.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-gray-700 shadow-lg bg-gray-800 text-white">
               <CardHeader>
-                <CardTitle className="text-2xl text-blue-900 flex items-center">
+                <CardTitle className="text-2xl text-orange-400 flex items-center">
                   <Zap className="h-6 w-6 mr-2" />
                   Our Vision
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   To be New Zealand's most trusted partner in safety and electronics innovation, empowering industries and individuals through safe, resilient, and intelligent technology solutions that drive progress and protect communities.
                 </p>
               </CardContent>
@@ -321,20 +321,20 @@ function AboutPage() {
       </section>
 
       {/* Core Values */}
-      <section className="py-20 bg-muted/20">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">Our Core Values</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-white">Our Core Values</h2>
           <div className="grid md:grid-cols-4 gap-8">
             {[
               { icon: <Shield className="h-8 w-8 text-orange-500" />, title: 'Trust', description: 'Building lasting relationships through reliable service and transparent communication.' },
-              { icon: <CheckCircle className="h-8 w-8 text-green-600" />, title: 'Safety', description: 'Uncompromising commitment to electrical safety and compliance standards.' },
-              { icon: <Zap className="h-8 w-8 text-blue-600" />, title: 'Innovation', description: 'Embracing cutting-edge technology and forward-thinking solutions.' },
-              { icon: <Users className="h-8 w-8 text-purple-600" />, title: 'Quality', description: 'Delivering excellence in every project and service we provide.' }
+              { icon: <CheckCircle className="h-8 w-8 text-green-500" />, title: 'Safety', description: 'Uncompromising commitment to electrical safety and compliance standards.' },
+              { icon: <Zap className="h-8 w-8 text-blue-400" />, title: 'Innovation', description: 'Embracing cutting-edge technology and forward-thinking solutions.' },
+              { icon: <Users className="h-8 w-8 text-purple-400" />, title: 'Quality', description: 'Delivering excellence in every project and service we provide.' }
             ].map((value, index) => (
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-4">{value.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-foreground">{value.title}</h3>
-                <p className="text-muted-foreground text-sm">{value.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-white">{value.title}</h3>
+                <p className="text-gray-300 text-sm">{value.description}</p>
               </div>
             ))}
           </div>
