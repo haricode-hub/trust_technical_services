@@ -6,7 +6,48 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
-import { CheckCircle, Shield, Zap, Wrench, Phone, Mail, MapPin, Users } from 'lucide-react'
+import { CheckCircle, Shield, Zap, Phone, Mail, MapPin, Users } from 'lucide-react'
+
+// Trust Technical Services Logo Component
+function TrustLogo({ className = "h-8 w-8" }) {
+  return (
+    <svg 
+      className={className}
+      viewBox="0 0 100 100" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Shield outline */}
+      <path
+        d="M50 5 L25 15 L25 35 C25 60 50 95 50 95 C50 95 75 60 75 35 L75 15 L50 5 Z"
+        fill="currentColor"
+        stroke="none"
+      />
+      {/* Cross in center */}
+      <path
+        d="M50 20 L50 80 M30 50 L70 50"
+        stroke="#000"
+        strokeWidth="3"
+        fill="none"
+      />
+      {/* Circuit board patterns */}
+      <circle cx="40" cy="35" r="1.5" fill="#000"/>
+      <circle cx="60" cy="35" r="1.5" fill="#000"/>
+      <circle cx="40" cy="65" r="1.5" fill="#000"/>
+      <circle cx="60" cy="65" r="1.5" fill="#000"/>
+      <circle cx="35" cy="50" r="1.5" fill="#000"/>
+      <circle cx="65" cy="50" r="1.5" fill="#000"/>
+      
+      {/* Circuit traces */}
+      <path d="M40 35 L35 35 L35 50" stroke="#000" strokeWidth="1" fill="none"/>
+      <path d="M60 35 L65 35 L65 50" stroke="#000" strokeWidth="1" fill="none"/>
+      <path d="M40 65 L35 65 L35 50" stroke="#000" strokeWidth="1" fill="none"/>
+      <path d="M60 65 L65 65 L65 50" stroke="#000" strokeWidth="1" fill="none"/>
+      <path d="M40 35 L40 30 L50 30 L60 30 L60 35" stroke="#000" strokeWidth="1" fill="none"/>
+      <path d="M40 65 L40 70 L50 70 L60 70 L60 65" stroke="#000" strokeWidth="1" fill="none"/>
+    </svg>
+  )
+}
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState('home')
