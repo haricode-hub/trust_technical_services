@@ -585,8 +585,8 @@ function Footer({ onNavigate }) {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <Wrench className="h-6 w-6 text-orange-500" />
+            <div className="flex items-center space-x-3 mb-4">
+              <TrustLogo className="h-8 w-8 text-orange-500" />
               <span className="text-lg font-bold">Trust Technical Services</span>
             </div>
             <p className="text-gray-400 text-sm">
