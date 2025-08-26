@@ -1,104 +1,223 @@
-import { MongoClient } from 'mongodb'
-import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
+import { MongoClient } from 'mongodb'
 
-// MongoDB connection
 let client
 let db
 
-async function connectToMongo() {
+async function connectToDatabase() {
   if (!client) {
-    client = new MongoClient(process.env.MONGO_URL)
-    await client.connect()
-    db = client.db(process.env.DB_NAME)
+    try {
+      client = new MongoClient(process.env.MONGO_URL)
+      await client.connect()
+      db = client.db('trust_technical_services')
+      console.log('Connected to MongoDB')
+    } catch (error) {
+      console.error('MongoDB connection error:', error)
+      throw error
+    }
   }
-  return db
+  return { client, db }
 }
 
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
+// Helper function to generate UUID
+function generateUUID() {
+  return 'xxxx-xxxx-4xxx-yxxx-xxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0
+    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
 }
 
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
-
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = params
-  const route = `/${path.join('/')}`
-  const method = request.method
-
+export async function GET(request, { params }) {
   try {
-    const db = await connectToMongo()
+    const { db } = await connectToDatabase()
+    const path = params?.path?.join('/') || ''
 
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/root' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
+    switch (path) {
+      case 'health':
+        return NextResponse.json({ 
+          status: 'ok', 
+          message: 'Trust Technical Services API is running',
+          timestamp: new Date().toISOString()
+        })
+
+      case 'services':
+        // Get all services
+        const services = await db.collection('services').find({}).toArray()
+        return NextResponse.json({ services })
+
+      case 'contact-submissions':
+        // Get all contact submissions (admin only)
+        const submissions = await db.collection('contact_submissions').find({}).sort({ createdAt: -1 }).toArray()
+        return NextResponse.json({ submissions })
+
+      default:
+        return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
     }
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
-      const body = await request.json()
-      
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
-      }
-
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
-      }
-
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
-    }
-
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
-      
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
-    }
-
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
-
   } catch (error) {
     console.error('API Error:', error)
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
-      { status: 500 }
-    ))
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+export async function POST(request, { params }) {
+  try {
+    const { db } = await connectToDatabase()
+    const path = params?.path?.join('/') || ''
+    const body = await request.json()
+
+    switch (path) {
+      case 'contact':
+        // Handle contact form submission
+        const { name, email, message } = body
+
+        if (!name || !email || !message) {
+          return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
+          return NextResponse.json({ error: 'Invalid email format' }, { status: 400 })
+        }
+
+        const contactSubmission = {
+          id: generateUUID(),
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          message: message.trim(),
+          status: 'new',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+
+        await db.collection('contact_submissions').insertOne(contactSubmission)
+
+        return NextResponse.json({ 
+          success: true, 
+          message: 'Contact form submitted successfully',
+          submissionId: contactSubmission.id
+        })
+
+      case 'services/inquiry':
+        // Handle service inquiry
+        const { serviceType, customerInfo, inquiryDetails } = body
+
+        if (!serviceType || !customerInfo?.name || !customerInfo?.email) {
+          return NextResponse.json({ error: 'Service type and customer information are required' }, { status: 400 })
+        }
+
+        const serviceInquiry = {
+          id: generateUUID(),
+          serviceType,
+          customerInfo: {
+            name: customerInfo.name.trim(),
+            email: customerInfo.email.trim().toLowerCase(),
+            phone: customerInfo.phone?.trim() || null,
+            company: customerInfo.company?.trim() || null
+          },
+          inquiryDetails: inquiryDetails?.trim() || '',
+          status: 'pending',
+          priority: 'normal',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+
+        await db.collection('service_inquiries').insertOne(serviceInquiry)
+
+        return NextResponse.json({ 
+          success: true, 
+          message: 'Service inquiry submitted successfully',
+          inquiryId: serviceInquiry.id
+        })
+
+      default:
+        return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+    }
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function PUT(request, { params }) {
+  try {
+    const { db } = await connectToDatabase()
+    const path = params?.path?.join('/') || ''
+    const body = await request.json()
+
+    switch (path) {
+      case 'contact-submissions/status':
+        // Update contact submission status
+        const { submissionId, status } = body
+
+        if (!submissionId || !status) {
+          return NextResponse.json({ error: 'Submission ID and status are required' }, { status: 400 })
+        }
+
+        const validStatuses = ['new', 'in-progress', 'completed', 'closed']
+        if (!validStatuses.includes(status)) {
+          return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+        }
+
+        const updateResult = await db.collection('contact_submissions').updateOne(
+          { id: submissionId },
+          { 
+            $set: { 
+              status,
+              updatedAt: new Date().toISOString()
+            }
+          }
+        )
+
+        if (updateResult.matchedCount === 0) {
+          return NextResponse.json({ error: 'Submission not found' }, { status: 404 })
+        }
+
+        return NextResponse.json({ 
+          success: true, 
+          message: 'Submission status updated successfully'
+        })
+
+      default:
+        return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+    }
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    const { db } = await connectToDatabase()
+    const path = params?.path?.join('/') || ''
+    const url = new URL(request.url)
+    const id = url.searchParams.get('id')
+
+    switch (path) {
+      case 'contact-submissions':
+        // Delete contact submission
+        if (!id) {
+          return NextResponse.json({ error: 'Submission ID is required' }, { status: 400 })
+        }
+
+        const deleteResult = await db.collection('contact_submissions').deleteOne({ id })
+
+        if (deleteResult.deletedCount === 0) {
+          return NextResponse.json({ error: 'Submission not found' }, { status: 404 })
+        }
+
+        return NextResponse.json({ 
+          success: true, 
+          message: 'Submission deleted successfully'
+        })
+
+      default:
+        return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+    }
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
