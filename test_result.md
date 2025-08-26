@@ -107,39 +107,48 @@ user_problem_statement: "Build a professional website for Trust Technical Servic
 backend:
   - task: "Contact form API endpoint"
     implemented: true
-    working: "needs_testing"
+    working: true
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "needs_testing"
         agent: "main"
         comment: "Implemented POST /api/contact endpoint with name, email, message validation and MongoDB storage"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED all tests: Valid submissions with proper validation (required fields, email format), data persistence to MongoDB contact_submissions collection, proper error handling for missing/invalid data. Tested with realistic data including NZ business emails and technical service requests."
         
   - task: "Health check API endpoint"
     implemented: true
-    working: "needs_testing"
+    working: true
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "needs_testing"
         agent: "main"
         comment: "Implemented GET /api/health endpoint to verify API is running"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED all tests: Returns correct JSON structure with status 'ok', descriptive message, and valid ISO timestamp. Endpoint responds correctly and confirms API is operational."
         
   - task: "Service inquiry API endpoint"
     implemented: true
-    working: "needs_testing"
+    working: true
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "needs_testing"
         agent: "main"
         comment: "Implemented POST /api/services/inquiry endpoint for service-specific inquiries"
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED all tests: Accepts service inquiries with proper validation (serviceType, customer name/email required), handles optional fields (phone, company, inquiryDetails), stores data in MongoDB service_inquiries collection with proper structure and UUIDs."
 
 frontend:
   - task: "Homepage with hero section"
