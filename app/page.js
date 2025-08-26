@@ -270,8 +270,8 @@ function Navigation({ activeSection, onNavigate }) {
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
-            <Wrench className="h-8 w-8 text-orange-500" />
+          <div className="flex items-center space-x-3">
+            <TrustLogo className="h-10 w-10 text-orange-500" />
             <span className="text-xl font-bold text-white">Trust Technical Services</span>
           </div>
           <div className="hidden md:flex space-x-8">
