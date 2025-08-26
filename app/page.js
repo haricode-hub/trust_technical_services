@@ -72,7 +72,7 @@ export default function HomePage() {
 
   if (activeSection === 'about') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <Navigation activeSection={activeSection} onNavigate={handleNavigation} />
         <AboutPage />
         <Footer onNavigate={handleNavigation} />
@@ -82,7 +82,7 @@ export default function HomePage() {
 
   if (activeSection === 'services') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <Navigation activeSection={activeSection} onNavigate={handleNavigation} />
         <ServicesPage services={services} />
         <Footer onNavigate={handleNavigation} />
@@ -92,7 +92,7 @@ export default function HomePage() {
 
   if (activeSection === 'contact') {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <Navigation activeSection={activeSection} onNavigate={handleNavigation} />
         <ContactPage />
         <Footer onNavigate={handleNavigation} />
