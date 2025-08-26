@@ -242,12 +242,12 @@ function Navigation({ activeSection, onNavigate }) {
   ]
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-border z-50">
+    <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
-            <Wrench className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-foreground">Trust Technical Services</span>
+            <Wrench className="h-8 w-8 text-orange-500" />
+            <span className="text-xl font-bold text-white">Trust Technical Services</span>
           </div>
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
@@ -256,8 +256,8 @@ function Navigation({ activeSection, onNavigate }) {
                 onClick={() => onNavigate(item.id)}
                 className={`text-sm font-medium transition-colors ${
                   activeSection === item.id
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-muted-foreground hover:text-foreground'
+                    ? 'text-orange-400 border-b-2 border-orange-400'
+                    : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {item.label}
