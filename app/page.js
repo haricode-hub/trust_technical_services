@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -54,6 +54,8 @@ function TrustLogo({ className = "h-14 w-14" }) {
 
 // Navigation Component
 function Navigation({ activeSection, onNavigate }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
@@ -62,13 +64,17 @@ function Navigation({ activeSection, onNavigate }) {
   ]
 
   return (
-    <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b5 border-gray-700 z-50">
+    <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
             <TrustLogo className="h-8 w-8 text-white" />
-            <span className="text-3xl font-bold text-white">Trust Technical Services</span>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+              Trust Technical Services
+            </span>
           </div>
+          
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <button
@@ -84,7 +90,40 @@ function Navigation({ activeSection, onNavigate }) {
               </button>
             ))}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-700">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  onNavigate(item.id)
+                  setIsMobileMenuOpen(false)
+                }}
+                className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  activeSection === item.id
+                    ? 'text-orange-400 bg-gray-800'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   )
@@ -93,27 +132,27 @@ function Navigation({ activeSection, onNavigate }) {
 // Footer Component
 function Footer({ onNavigate }) {
   return (
-    <footer className="bg-gray-900 text-white py-16 border-t border-gray-700">
+    <footer className="bg-gray-900 text-white py-12 sm:py-16 border-t border-gray-700">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
               <TrustLogo className="h-6 w-6 text-white" />
-              <span className="text-lg font-bold">Trust Technical Services</span>
+              <span className="text-base sm:text-lg font-bold">Trust Technical Services</span>
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm leading-relaxed">
               Your trusted partner in safety and electronics innovation across New Zealand.
             </p>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4 text-orange-400">Quick Links</h3>
+            <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               {['Home', 'About', 'Services', 'Contact'].map((item) => (
                 <li key={item}>
                   <button 
                     onClick={() => onNavigate(item.toLowerCase())}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors block"
                   >
                     {item}
                   </button>
@@ -123,35 +162,38 @@ function Footer({ onNavigate }) {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4 text-orange-400">Services</h3>
+            <h3 className="font-semibold mb-4 text-orange-400 text-base">Services</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>Test & Tag Services</li>
+              <li className="ml-3 text-xs">• Single Phase Testing</li>
+              <li className="ml-3 text-xs">• 3 Phase Testing</li>
+              <li className="ml-3 text-xs">• RCD Testing</li>
+              <li className="ml-3 text-xs">• Microwave Leakage</li>
               <li>Electronics Design</li>
-              <li>Fire & Safety Testing</li>
-              <li>Compliance Certification</li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4 text-orange-400">Contact</h3>
+            <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
             <div className="space-y-2 text-sm text-gray-400">
-              <p>+64 (09) 123-4567</p>
-              <p>info@trusttechnical.co.nz</p>
-              <p>Auckland, New Zealand</p>
+              <p>+64 220980511</p>
+              <p className="break-all">salaskjose@gmail.com</p>
+              <p>20 Roslyn Farm Street</p>
+              <p>Drury 2579</p>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400">
+        <div className="border-t border-gray-700 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p className="text-xs sm:text-sm text-gray-400">
               © 2024 Trust Technical Services. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <button className="text-sm text-gray-400 hover:text-white transition-colors">
+            <div className="flex space-x-4 sm:space-x-6">
+              <button className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
                 Privacy Policy
               </button>
-              <button className="text-sm text-gray-400 hover:text-white transition-colors">
+              <button className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
                 Legal Notice
               </button>
             </div>
@@ -197,40 +239,41 @@ function HomePage({ onNavigate, services }) {
           }}
         />
         <div className="container mx-auto px-4 text-center text-white relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
             Your Trusted Partner in
             <span className="text-orange-400 block">Safety & Electronics Innovation</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed px-4">
             Empowering New Zealand industries and individuals through safe, resilient, and intelligent technology solutions.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
-              onClick={() => onNavigate('services')}
-            >
-              Explore Services
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 text-lg"
-              onClick={() => onNavigate('contact')}
-            >
-              Contact Us
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+          <Button
+            size="lg"
+            className="bg-orange-500 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+            onClick={() => onNavigate('services')}
+          >
+            Explore Services
+          </Button>
+
+          <Button
+            size="lg"
+            className="bg-blue-900 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-blue-700 hover:scale-105 transform transition-all duration-200 rounded-md border border-blue-800"
+            onClick={() => onNavigate('contact')}
+          >
+            Contact Us
+          </Button>
+
           </div>
         </div>
       </section>
 
       {/* Core Services Section */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-16 sm:py-20 bg-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-white">
             Our Core Services
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {services.map((service) => (
               <Card key={service.id} className="group hover:shadow-2xl transition-all duration-300 border border-gray-700 shadow-lg bg-gray-800 text-white">
                 <div className="aspect-video overflow-hidden rounded-t-lg">
@@ -238,26 +281,34 @@ function HomePage({ onNavigate, services }) {
                     src={service.image} 
                     alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                 </div>
-                <CardHeader>
-                  <CardTitle className="text-xl text-orange-400">{service.title}</CardTitle>
-                  <CardDescription className="text-gray-300">
+                <CardHeader className="p-4 sm:p-6">
+                  <CardTitle className="text-lg sm:text-xl text-orange-400">{service.title}</CardTitle>
+                  <CardDescription className="text-gray-300 text-sm sm:text-base">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4 sm:p-6 pt-0">
                   <ul className="space-y-2">
-                    {service.features.slice(0, 2).map((feature, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-300">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                        {feature}
+                    {service.features.slice(0, 3).map((feature, index) => (
+                      <li key={index} className="flex items-start text-xs sm:text-sm text-gray-300">
+                        <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
+                    {service.features.length > 3 && (
+                      <li className="text-xs sm:text-sm text-gray-400 ml-6">
+                        <button 
+                          onClick={() => onNavigate('services')}
+                          className="hover:text-orange-400 transition-colors cursor-pointer italic underline"
+                        >
+                          + {service.features.length - 3} more services...
+                        </button>
+                      </li>
+                    )}
                   </ul>
-                  <Badge variant="secondary" className="mt-4 bg-orange-500/20 text-orange-300 border-orange-500/30">
-                    Professional Service
-                  </Badge>
                 </CardContent>
               </Card>
             ))}
@@ -298,7 +349,7 @@ function HomePage({ onNavigate, services }) {
           </p>
           <Button 
             size="lg" 
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg"
+            className="bg-orange-500 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
             onClick={() => onNavigate('contact')}
           >
             Get Started Today
@@ -599,7 +650,25 @@ function AboutPage() {
 }
 
 // Services Page Component
-function ServicesPage({ services }) {
+function ServicesPage({ services, onNavigate }) {
+  const [activeTestingType, setActiveTestingType] = useState(null)
+  const [activeDesignType, setActiveDesignType] = useState(null)
+
+  // Auto-expand Test & Tag if coming from home page click
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('expand') === 'test-tag') {
+      // Auto-expand the first testing type or show all
+      setTimeout(() => {
+        document.getElementById('test-tag')?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    } else if (urlParams.get('expand') === 'electronics') {
+      setTimeout(() => {
+        document.getElementById('electronics')?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [])
+
   return (
     <div className="pt-20">
       {/* Services Hero */}
@@ -607,7 +676,7 @@ function ServicesPage({ services }) {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Our Professional Services</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Comprehensive technical solutions for electrical safety, electronics design, and fire safety compliance across New Zealand.
+            Comprehensive technical solutions for electrical safety, electronics design, and testing compliance across New Zealand.
           </p>
         </div>
       </section>
@@ -617,29 +686,142 @@ function ServicesPage({ services }) {
         <div className="container mx-auto px-4">
           <div className="space-y-20">
             {services.map((service, index) => (
-              <div key={service.id} className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
-                <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-                  <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
-                  <p className="text-lg text-gray-300 mb-6">{service.description}</p>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="mt-6 bg-orange-500 hover:bg-orange-600 text-white">
-                    Learn More
-                  </Button>
-                </div>
-                <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                  <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+              <div key={service.id} id={service.id}>
+                <div className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
+                  <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
+                    <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
+                    <p className="text-lg text-gray-300 mb-6">{service.description}</p>
+                    
+                    {/* Test & Tag Services with Subsections */}
+                    {service.id === 'test-tag' && service.testingTypes ? (
+                      <div className="space-y-6">
+                        {/* Internal Navigation for Testing Types */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {Object.keys(service.testingTypes).map((testingType) => (
+                            <button
+                              key={testingType}
+                              onClick={() => setActiveTestingType(activeTestingType === testingType ? null : testingType)}
+                              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                                activeTestingType === testingType
+                                  ? 'bg-orange-500 text-white'
+                                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                              }`}
+                            >
+                              {testingType}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Show selected testing type details */}
+                        {activeTestingType && (
+                          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div className="mb-4">
+                              <h3 className="text-xl font-semibold text-orange-300">{activeTestingType}</h3>
+                            </div>
+                            <p className="text-gray-300 mb-4">{service.testingTypes[activeTestingType].description}</p>
+                            <ul className="space-y-2">
+                              {service.testingTypes[activeTestingType].features.map((feature, featureIndex) => (
+                                <li key={featureIndex} className="flex items-center text-sm">
+                                  <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                                  <span className="text-gray-300">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Show general features when no specific type is selected */}
+                        {!activeTestingType && (
+                          <ul className="space-y-3">
+                            {service.features.map((feature, featureIndex) => (
+                              <li key={featureIndex} className="flex items-center">
+                                <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                                <span className="text-gray-300">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ) : service.id === 'electronics' && service.designTypes ? (
+                      /* Electronics Design with interactive sections */
+                      <div className="space-y-6">
+                        {/* Internal Navigation for Design Types */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {Object.keys(service.designTypes).map((designType) => (
+                            <button
+                              key={designType}
+                              onClick={() => setActiveDesignType(activeDesignType === designType ? null : designType)}
+                              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                                activeDesignType === designType
+                                  ? 'bg-orange-500 text-white'
+                                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                              }`}
+                            >
+                              {designType}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Show selected design type details */}
+                        {activeDesignType && (
+                          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div className="mb-4">
+                              <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeDesignType}</h3>
+                            </div>
+                            <p className="text-gray-300 mb-4">{service.designTypes[activeDesignType].description}</p>
+                            <ul className="space-y-2">
+                              {service.designTypes[activeDesignType].features.map((feature, featureIndex) => (
+                                <li key={featureIndex} className="flex items-center text-sm">
+                                  <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                                  <span className="text-gray-300">{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Show general features when no specific type is selected */}
+                        {!activeDesignType && (
+                          <ul className="space-y-3">
+                            {service.features.map((feature, featureIndex) => (
+                              <li key={featureIndex} className="flex items-center">
+                                <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                                <span className="text-gray-300">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ) : (
+                      /* Show regular features for other services */
+                      <ul className="space-y-3">
+                        {service.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center">
+                            <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                            <span className="text-gray-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  
+                  <Button 
+                  size="lg" 
+                  className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                  onClick={() => onNavigate('services')}
+                >
+                  Contact Us for Service
+                </Button>
+
+
+                  </div>
+                  <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
+                    <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                      <img 
+                        src={service.image} 
+                        alt={service.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -661,8 +843,27 @@ function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We\'ll get back to you soon.')
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Contact Form Message from ${formData.name}`)
+    const body = encodeURIComponent(`
+Name: ${formData.name}
+Email: ${formData.email}
+
+Message:
+${formData.message}
+
+---
+Sent from Trust Technical Services website contact form
+    `)
+    
+    const mailtoLink = `mailto:salaskjose@gmail.com?subject=${subject}&body=${body}`
+    
+    // Open user's default email client
+    window.location.href = mailtoLink
+    
+    // Show confirmation and reset form
+    alert('Opening your email client to send the message...')
     setFormData({ name: '', email: '', message: '' })
   }
 
@@ -680,7 +881,7 @@ function ContactPage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Get In Touch</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ready to discuss your electrical safety, electronics design, or fire safety testing needs? Contact our expert team today.
+            Ready to discuss your electrical safety, electronics design, or testing needs? Contact our expert team today.
           </p>
         </div>
       </section>
@@ -760,21 +961,21 @@ function ContactPage() {
                     <Phone className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Phone</h3>
-                      <p className="text-gray-300">+64 (09) 123-4567</p>
+                      <p className="text-gray-300">+64 220980511</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
                     <Mail className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Email</h3>
-                      <p className="text-gray-300">info@trusttechnical.co.nz</p>
+                      <p className="text-gray-300">salaskjose@gmail.com</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
                     <MapPin className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-white">Location</h3>
-                      <p className="text-gray-300">Auckland, New Zealand</p>
+                      <h3 className="font-semibold text-white">Address</h3>
+                      <p className="text-gray-300">20 Roslyn Farm Street<br />Drury 2579</p>
                     </div>
                   </div>
                 </CardContent>
@@ -821,23 +1022,71 @@ export default function TrustTechnicalApp() {
     {
       id: 'test-tag',
       title: 'Test & Tag Services',
-      description: 'Comprehensive electrical safety testing and compliance certification for appliances and equipment.',
-      image: 'https://images.unsplash.com/photo-1723536998172-9805f991916f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
-      features: ['Single-phase & three-phase testing', 'RCD functionality checks', 'Compliance certification', 'Detailed reporting']
+      description: 'Comprehensive electrical safety testing and compliance certification covering single-phase, 3-phase, RCD testing, and microwave leakage detection. Complete protection for your equipment and peace of mind for your safety.',
+      image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+      features: [
+        'Single Phase Testing - Home & business electrical safety',
+        '3 Phase Testing - Industrial equipment compliance',
+        'RCD Testing - Residual current device verification',
+        'Microwave Leakage Testing - Appliance safety assurance'
+      ],
+      testingTypes: {
+        'Single Phase Testing': {
+          description: 'Professional single-phase safety testing to ensure your equipment is safe and compliant. Our service includes comprehensive checks for electrical hazards like faulty insulation and earth connections, providing crucial protection for your home or business.',
+          image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGVyfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Comprehensive electrical hazard checks', 'Faulty insulation detection', 'Earth connection testing', 'Safety compliance certification']
+        },
+        '3 Phase Testing': {
+          description: 'Ensure safety and compliance for your industrial equipment with our 3-phase testing services. We perform critical checks, including insulation and earth continuity, to protect against shock, fire, and equipment failure, keeping operations safe and running smoothly.',
+          image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx0aHJlZSUyMHBoYXNlJTIwaW5kdXN0cmlhbHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Industrial equipment safety checks', 'Insulation resistance testing', 'Earth continuity verification', 'Shock and fire protection']
+        },
+        'RCD Testing': {
+          description: 'Professional RCD testing is vital for your safety. We test these devices to ensure they trip quickly and correctly, protecting you from electric shock. Our service guarantees your residual current devices are compliant and fully functional.',
+          image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxyY2QlMjBzd2l0Y2h8ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
+          features: ['Trip time verification', 'Correct operation testing', 'Electric shock protection', 'Compliance guarantee']
+        },
+        'Microwave Leakage Testing': {
+          description: 'Microwave leakage testing to ensure your appliance is safe. Our service measures radiation levels to confirm they are within safe limits, protecting you from potential health risks associated with excessive microwave leakage.',
+          image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxtaWNyb3dhdmUlMjB0ZXN0aW5nfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Radiation level measurement', 'Safe limit verification', 'Health risk protection', 'Appliance safety assurance']
+        }
+      }
     },
     {
       id: 'electronics',
       title: 'Electronics Design',
-      description: 'Professional PCB design, embedded systems development, and hardware prototyping solutions.',
-      image: 'https://images.unsplash.com/photo-1560165143-fa7e2d9e594c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxQQ0IlMjBkZXNpZ258ZW58MHx8fHwxNzU2MjI3NDU5fDA&ixlib=rb-4.1.0&q=85',
-      features: ['PCB design (digital & analog)', 'Microcontroller integration', 'Embedded hardware prototyping', 'IPC/RoHS/UL compliance']
-    },
-    {
-      id: 'fire-safety',
-      title: 'Fire & Safety Testing',
-      description: 'Specialized testing for fire safety equipment, microwave leakage detection, and safety system inspections.',
-      image: 'https://images.unsplash.com/photo-1595306394931-b35768661692?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxmaXJlJTIwc2FmZXR5fGVufDB8fHx8MTc1NjIyNzQ2NXww&ixlib=rb-4.1.0&q=85',
-      features: ['Microwave leakage testing', 'Fire extinguisher inspections', 'Hydrant system checks', 'Safety compliance audits']
+      description: 'Professional PCB design, embedded systems development, and hardware prototyping solutions with comprehensive expertise from concept to manufacturing.',
+      image: '/jShzvkxcTdWEsLAEFwi4qg.webp',
+      features: [
+        'Custom PCB Design & Layouts - Multi-layer boards (rigid, flex, rigid-flex)',
+        'Embedded System Architecture - Microcontroller integration & block diagrams',
+        'Circuit Design & Simulation - Analog, digital, RF, and low-power systems',
+        'Documentation & Manufacturing Support - Complete BOMs & production files',
+        'Compliance & Testing - AS/NZS 3100, CE, FCC & EMC validation'
+      ],
+      designTypes: {
+        'Custom PCB Design & Layouts': {
+          description: 'Complete PCB design solutions from concept to production-ready layouts. We specialize in multi-layer board designs including rigid, flex, and rigid-flex configurations with advanced SMT and through-hole component layouts for optimal performance and manufacturability.',
+          features: ['Multi-layer boards (rigid, flex, and rigid-flex)', 'SMT & through-hole layouts', '3D modeling for accurate visualization', 'High-speed digital design', 'RF and microwave layouts', 'Component placement optimization']
+        },
+        'Embedded System Architecture': {
+          description: 'Comprehensive embedded system design and architecture planning. From microcontroller selection to complete system integration, we ensure your embedded solutions meet performance requirements while maintaining compliance with industry standards.',
+          features: ['Microcontroller integration & block diagrams', 'Technology evaluation & standards-compliant workflows', 'System-on-chip (SoC) solutions', 'Real-time operating system (RTOS) integration', 'Hardware-software co-design', 'Performance optimization strategies']
+        },
+        'Circuit Design, Simulation & Prototyping': {
+          description: 'Advanced circuit design and simulation services covering analog, digital, RF, and low-power systems. We provide complete prototyping solutions including solar energy harvesting and noise-optimized designs with EMI/EMC compliance from the ground up.',
+          features: ['Analog, digital, RF, and low-power systems', 'Solar energy harvesting & noise-optimized designs', 'EMI/EMC-aware schematics for compliance', 'SPICE simulation and analysis', 'Rapid prototyping and testing', 'Power management solutions']
+        },
+        'Documentation & Manufacturing Support': {
+          description: 'Complete documentation packages and manufacturing support to ensure smooth production scaling. From detailed BOMs to factory programming, we provide comprehensive support for successful product launches and ongoing manufacturing.',
+          features: ['Complete BOMs & production files', 'Version-controlled design data', 'Factory programming & support for scalable manufacturing', 'Assembly drawings and specifications', 'Test procedures and quality control', 'Supply chain optimization']
+        },
+        'Compliance & Testing': {
+          description: 'Comprehensive compliance testing and validation services ensuring your products meet international standards. We provide complete testing solutions including fault analysis and performance verification to guarantee regulatory approval and market readiness.',
+          features: ['AS/NZS 3100, CE, FCC & EMC validation', 'Fault tree analysis & endurance testing', 'Comprehensive performance verification', 'Safety standard compliance', 'Environmental testing coordination', 'Certification support and documentation']
+        }
+      }
     }
   ]
 
@@ -854,7 +1103,7 @@ export default function TrustTechnicalApp() {
       case 'about':
         return <AboutPage />
       case 'services':
-        return <ServicesPage services={services} />
+        return <ServicesPage services={services} onNavigate={handleNavigation} />
       case 'contact':
         return <ContactPage />
       default:
