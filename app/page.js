@@ -57,12 +57,12 @@ function Navigation({ activeSection, onNavigate }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'our-team', label: 'Our Team' }, // Changed from { id: 'about', label: 'About' }
+  { id: 'home', label: 'Home' }, 
   { id: 'test-tag', label: 'Test and Tag' },
   { id: 'electronics', label: 'Electronic Design' },
+  { id: 'our-team', label: 'Our Team' },
   { id: 'faq', label: 'FAQ' },
-  { id: 'contact', label: 'Contact' }
+  { id: 'contact', label: 'Contact Us' }
 ]
 
   return (
@@ -143,8 +143,7 @@ function Footer({ onNavigate }) {
               <span className="text-base sm:text-lg font-bold">Trust Technical Services</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Your trusted partner in safety and electronics innovation—empowering industries and individuals through safe, resilient, 
-              and intelligent technology solutions.
+              Your trusted partner in safety and electronics—empowering industries and individuals through safe, resilient, and intelligent technology solutions.
             </p>
           </div>
           
@@ -177,7 +176,7 @@ function Footer({ onNavigate }) {
           </div>
           
           <div>
-            <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
+            <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact Us</h3>
             <div className="space-y-2 text-sm text-gray-400">
               <p>+64 220980511</p>
               <p className="break-all">salaskjose@gmail.com</p>
@@ -245,7 +244,7 @@ function HomePage({ onNavigate, services }) {
         <div className="container mx-auto px-4 text-center text-white relative z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
             Your Trusted Partner in
-            <span className="text-orange-400 block">Safety & Electronics Innovation</span>
+            <span className="text-orange-400 block">Safety & Electronics</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed px-4">
             Empowering  industries and individuals through safe, resilient, and intelligent technology solutions.
