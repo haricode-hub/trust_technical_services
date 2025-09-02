@@ -18,37 +18,11 @@ import {
 // Trust Technical Services Logo Component
 function TrustLogo({ className = "h-14 w-14" }) {
   return (
-    <svg 
+    <img 
+      src="/image.png" 
+      alt="Trust Technical Services Logo" 
       className={className}
-      viewBox="0 0 100 100" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M50 5 L25 15 L25 35 C25 60 50 95 50 95 C50 95 75 60 75 35 L75 15 L50 5 Z"
-        fill="currentColor"
-        stroke="none"
-      />
-      <path
-        d="M50 20 L50 80 M30 50 L70 50"
-        stroke="#000"
-        strokeWidth="3"
-        fill="none"
-      />
-      <circle cx="40" cy="35" r="1.5" fill="#000"/>
-      <circle cx="60" cy="35" r="1.5" fill="#000"/>
-      <circle cx="40" cy="65" r="1.5" fill="#000"/>
-      <circle cx="60" cy="65" r="1.5" fill="#000"/>
-      <circle cx="35" cy="50" r="1.5" fill="#000"/>
-      <circle cx="65" cy="50" r="1.5" fill="#000"/>
-      
-      <path d="M40 35 L35 35 L35 50" stroke="#000" strokeWidth="1" fill="none"/>
-      <path d="M60 35 L65 35 L65 50" stroke="#000" strokeWidth="1" fill="none"/>
-      <path d="M40 65 L35 65 L35 50" stroke="#000" strokeWidth="1" fill="none"/>
-      <path d="M60 65 L65 65 L65 50" stroke="#000" strokeWidth="1" fill="none"/>
-      <path d="M40 35 L40 30 L50 30 L60 30 L60 35" stroke="#000" strokeWidth="1" fill="none"/>
-      <path d="M40 65 L40 70 L50 70 L60 70 L60 65" stroke="#000" strokeWidth="1" fill="none"/>
-    </svg>
+    />
   )
 }
 
@@ -68,9 +42,9 @@ function Navigation({ activeSection, onNavigate }) {
   return (
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-3">
-            <TrustLogo className="h-12 w-12 text-white" />
+            <TrustLogo className="h-12 w-11 text-white" />
             <span className="text-lg sm:text-xl md:text-2xl font-bold text-white">
               Trust Technical Services
             </span>
@@ -142,8 +116,8 @@ function Footer({ onNavigate }) {
               <TrustLogo className="h-6 w-6 text-white" />
               <span className="text-base sm:text-lg font-bold">Trust Technical Services</span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Your trusted partner in safety and electronics—empowering industries and individuals through safe, resilient, and intelligent technology solutions.
+            <p className="text-gray-400 text-sm leading-relaxed text-justify">
+              Your trusted partner in Testing, Safety & Electronics Design Innovation—empowering industries and individuals through safe, resilient, intelligent and reliable technology solutions.
             </p>
           </div>
           
@@ -244,10 +218,10 @@ function HomePage({ onNavigate, services }) {
         <div className="container mx-auto px-4 text-center text-white relative z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
             Your Trusted Partner in
-            <span className="text-orange-400 block">Safety & Electronics</span>
+            <span className="text-orange-400 block">Testing, Safety & Electronics Design Innovation</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-            Empowering  industries and individuals through safe, resilient, and intelligent technology solutions.
+            Empowering  industries and individuals through safe, resilient, intelligent and reliable technology solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Button
@@ -282,7 +256,7 @@ function HomePage({ onNavigate, services }) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-gray-300 leading-relaxed text-lg text-justify">
                   To deliver safe, compliant, and cutting-edge technical solutions while nurturing industry talent and 
                   ensuring the highest standards of electrical safety and innovation across the manufacturing 
                   and business sectors. We are committed to empowering organizations through reliable embedded
@@ -299,7 +273,7 @@ function HomePage({ onNavigate, services }) {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 leading-relaxed text-lg">
+                <p className="text-gray-300 leading-relaxed text-lg text-justify">
                   To empower industries and individuals through intelligent, safe, and resilient technology—bridging education,
                    embedded hardware innovation, and cybersecurity. With a foundation in advanced electronics engineering and hands-on expertise, our goal is to foster a smarter, 
                   safer world by developing cutting-edge tools, nurturing talent, and protecting systems from the ground up.
@@ -329,7 +303,7 @@ function HomePage({ onNavigate, services }) {
                 </div>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="text-lg sm:text-xl text-orange-400">{service.title}</CardTitle>
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
+                  <CardDescription className="text-gray-300 text-sm sm:text-base text-justify">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
@@ -372,7 +346,7 @@ function HomePage({ onNavigate, services }) {
                   {feature.icon}
                 </div>
                 <h3 className="text-2xl font-semibold mb-4 text-white">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed text-justify">
                   {feature.description}
                 </p>
               </div>
@@ -387,7 +361,7 @@ function HomePage({ onNavigate, services }) {
           <h2 className="text-4xl font-bold mb-6">
             Ready to Ensure Your Equipment's Safety?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300 text-justify">
             Get professional electrical testing, innovative electronics design, and comprehensive safety solutions from Trust Technical Services.
           </p>
           <Button 
@@ -413,7 +387,7 @@ function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-white mb-6">Leadership Excellence</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto text-justify">
               Meet the visionary leaders driving innovation and excellence in technical solutions
             </p>
           </div>
@@ -438,7 +412,7 @@ function AboutPage() {
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    <p className="text-gray-300 text-lg leading-relaxed mb-6 text-justify">
                       Master's-qualified Embedded Systems Engineer with 6+ years of comprehensive hardware 
                       and software design experience spanning PCB development, microcontroller programming, 
                       and IoT systems integration. Distinguished professional with proven track record of 
@@ -509,7 +483,7 @@ function AboutPage() {
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    <p className="text-gray-300 text-lg leading-relaxed mb-6 text-justify">
                       Distinguished healthcare operations leader with extensive experience across clinical care, 
                       community health management, and multi-site operations. Babitha brings executive insight, 
                       frontline empathy, and transformational leadership to every organization she guides, 
@@ -618,7 +592,7 @@ function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold text-white mb-8">Our Commitment</h2>
-            <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            <p className="text-xl text-gray-300 leading-relaxed mb-8 text-justify">
               At Trust Technical Services, we are committed to delivering excellence through innovation, 
               safety, and reliability. Our team combines deep technical expertise with a passion for 
               education and mentorship, ensuring that every project not only meets current needs but 
@@ -644,7 +618,7 @@ function TestAndTagPage({ service, onNavigate }) {
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Test and Tag Services</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto text-justify">
             Comprehensive electrical safety testing and compliance certification for all your equipment.
           </p>
         </div>
@@ -656,7 +630,7 @@ function TestAndTagPage({ service, onNavigate }) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
-              <p className="text-lg text-gray-300 mb-6">{service.description}</p>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service.description}</p>
               
               {/* Test & Tag Services with Subsections */}
               <div className="space-y-6">
@@ -683,7 +657,7 @@ function TestAndTagPage({ service, onNavigate }) {
                     <div className="mb-4">
                       <h3 className="text-xl font-semibold text-orange-300">{activeTestingType}</h3>
                     </div>
-                    <p className="text-gray-300 mb-4">{service.testingTypes[activeTestingType].description}</p>
+                    <p className="text-gray-300 mb-4 text-justify">{service.testingTypes[activeTestingType].description}</p>
                     <ul className="space-y-2">
                       {service.testingTypes[activeTestingType].features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-sm">
@@ -742,7 +716,7 @@ function ElectronicsDesignPage({ service, onNavigate }) {
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Electronics Design Services</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto text-justify">
             Professional PCB design, embedded systems development, and hardware prototyping solutions.
           </p>
         </div>
@@ -754,7 +728,7 @@ function ElectronicsDesignPage({ service, onNavigate }) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
-              <p className="text-lg text-gray-300 mb-6">{service.description}</p>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service.description}</p>
               
               {/* Electronics Design with interactive sections */}
               <div className="space-y-6">
@@ -781,7 +755,7 @@ function ElectronicsDesignPage({ service, onNavigate }) {
                     <div className="mb-4">
                       <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeDesignType}</h3>
                     </div>
-                    <p className="text-gray-300 mb-4">{service.designTypes[activeDesignType].description}</p>
+                    <p className="text-gray-300 mb-4 text-justify">{service.designTypes[activeDesignType].description}</p>
                     <ul className="space-y-2">
                       {service.designTypes[activeDesignType].features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center text-sm">
@@ -966,7 +940,7 @@ Sent from Trust Technical Services website contact form
             <Card className="border border-gray-700 shadow-lg bg-gray-800">
               <CardHeader>
                 <CardTitle className="text-2xl text-orange-400">Send Us a Message</CardTitle>
-                <CardDescription className="text-gray-300">
+                <CardDescription className="text-gray-300 text-justify">
                   Fill out the form below and we'll get back to you within 24 hours.
                 </CardDescription>
               </CardHeader>
