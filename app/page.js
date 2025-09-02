@@ -189,7 +189,7 @@ function Footer({ onNavigate }) {
         <div className="border-t border-gray-700 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-xs sm:text-sm text-gray-400">
-              © 2024 Trust Technical Services. All rights reserved.
+              © 2025 Trust Technical Services. All rights reserved.
             </p>
             <div className="flex space-x-4 sm:space-x-6">
               <button className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
