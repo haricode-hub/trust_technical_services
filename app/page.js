@@ -57,11 +57,13 @@ function Navigation({ activeSection, onNavigate }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
-    { id: 'contact', label: 'Contact' }
-  ]
+  { id: 'home', label: 'Home' },
+  { id: 'our-team', label: 'Our Team' }, // Changed from { id: 'about', label: 'About' }
+  { id: 'test-tag', label: 'Test and Tag' },
+  { id: 'electronics', label: 'Electronic Design' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'contact', label: 'Contact' }
+]
 
   return (
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
@@ -141,17 +143,18 @@ function Footer({ onNavigate }) {
               <span className="text-base sm:text-lg font-bold">Trust Technical Services</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Your trusted partner in safety and electronics innovation across New Zealand.
+              Your trusted partner in safety and electronics innovation—empowering industries and individuals through safe, resilient, 
+              and intelligent technology solutions.
             </p>
           </div>
           
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              {['Home', 'About', 'Services', 'Contact'].map((item) => (
+              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'FAQ', 'Contact'].map((item) => (
                 <li key={item}>
                   <button 
-                    onClick={() => onNavigate(item.toLowerCase())}
+                    onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
                     className="text-gray-400 hover:text-white transition-colors block"
                   >
                     {item}
@@ -209,6 +212,7 @@ function Footer({ onNavigate }) {
 // ============================================================================
 
 // Home Page Component
+// Home Page Component
 function HomePage({ onNavigate, services }) {
   const whyChooseUsFeatures = [
     {
@@ -244,25 +248,65 @@ function HomePage({ onNavigate, services }) {
             <span className="text-orange-400 block">Safety & Electronics Innovation</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed px-4">
-            Empowering New Zealand industries and individuals through safe, resilient, and intelligent technology solutions.
+            Empowering  industries and individuals through safe, resilient, and intelligent technology solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Button
             size="lg"
             className="bg-orange-500 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
-            onClick={() => onNavigate('services')}
+            onClick={() => onNavigate('test-tag')}
           >
-            Explore Services
+            Test & Tag Services
           </Button>
 
           <Button
             size="lg"
             className="bg-blue-900 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-blue-700 hover:scale-105 transform transition-all duration-200 rounded-md border border-blue-800"
-            onClick={() => onNavigate('contact')}
+            onClick={() => onNavigate('electronics')}
           >
-            Contact Us
+            Electronics Design
           </Button>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 bg-gradient-to-b from-black to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 mb-20">
+            <Card className="border border-gray-700 shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="text-3xl text-orange-400 flex items-center">
+                  <Target className="h-8 w-8 mr-3" />
+                  Our Mission
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 leading-relaxed text-lg">
+                  To deliver safe, compliant, and cutting-edge technical solutions while nurturing industry talent and 
+                  ensuring the highest standards of electrical safety and innovation across the manufacturing 
+                  and business sectors. We are committed to empowering organizations through reliable embedded
+                   systems and fostering technological advancement through education and mentorship.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-gray-700 shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
+              <CardHeader>
+                <CardTitle className="text-3xl text-orange-400 flex items-center">
+                  <Lightbulb className="h-8 w-8 mr-3" />
+                  Our Vision
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 leading-relaxed text-lg">
+                  To empower industries and individuals through intelligent, safe, and resilient technology—bridging education,
+                   embedded hardware innovation, and cybersecurity. With a foundation in advanced electronics engineering and hands-on expertise, our goal is to foster a smarter, 
+                  safer world by developing cutting-edge tools, nurturing talent, and protecting systems from the ground up.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -301,7 +345,7 @@ function HomePage({ onNavigate, services }) {
                     {service.features.length > 3 && (
                       <li className="text-xs sm:text-sm text-gray-400 ml-6">
                         <button 
-                          onClick={() => onNavigate('services')}
+                          onClick={() => onNavigate(service.id)}
                           className="hover:text-orange-400 transition-colors cursor-pointer italic underline"
                         >
                           + {service.features.length - 3} more services...
@@ -345,7 +389,7 @@ function HomePage({ onNavigate, services }) {
             Ready to Ensure Your Equipment's Safety?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
-            Get professional electrical testing, innovative electronics design, and comprehensive safety solutions from New Zealand's trusted technical experts.
+            Get professional electrical testing, innovative electronics design, and comprehensive safety solutions from Trust Technical Services.
           </p>
           <Button 
             size="lg" 
@@ -359,70 +403,12 @@ function HomePage({ onNavigate, services }) {
     </div>
   )
 }
-
 // Enhanced About Page Component
 function AboutPage() {
   return (
     <div className="pt-20 bg-black min-h-screen">
       {/* About Hero */}
-      <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 to-blue-600/10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold text-white mb-6 bg-gradient-to-r from-orange-400 to-blue-400 bg-clip-text text-transparent">
-              About Trust Technical Services
-            </h1>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              Bridging education, innovation, and safety through cutting-edge electronics engineering 
-              and comprehensive technical solutions across New Zealand's evolving industrial landscape.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="py-20 bg-gradient-to-b from-black to-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 mb-20">
-            <Card className="border border-gray-700 shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-3xl text-orange-400 flex items-center">
-                  <Target className="h-8 w-8 mr-3" />
-                  Our Mission
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  To deliver safe, compliant, and cutting-edge technical solutions while nurturing 
-                  industry talent and ensuring the highest standards of electrical safety and 
-                  innovation across New Zealand's manufacturing and business sectors. We are committed 
-                  to empowering organizations through reliable embedded systems and fostering 
-                  technological advancement through education and mentorship.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-gray-700 shadow-2xl bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-3xl text-orange-400 flex items-center">
-                  <Lightbulb className="h-8 w-8 mr-3" />
-                  Our Vision
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  To empower industries and individuals through intelligent, safe, and resilient 
-                  technology—bridging education, embedded hardware innovation, and cybersecurity. 
-                  With a foundation in advanced electronics engineering and hands-on expertise, 
-                  our goal is to foster a smarter, safer world by developing cutting-edge tools, 
-                  nurturing talent, and protecting systems from the ground up.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
+    
       {/* Leadership Team */}
       <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-4">
@@ -649,183 +635,97 @@ function AboutPage() {
   )
 }
 
-// Services Page Component
-function ServicesPage({ services, onNavigate }) {
+// Test and Tag Page Component
+function TestAndTagPage({ service, onNavigate }) {
   const [activeTestingType, setActiveTestingType] = useState(null)
-  const [activeDesignType, setActiveDesignType] = useState(null)
-
-  // Auto-expand Test & Tag if coming from home page click
-  React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('expand') === 'test-tag') {
-      // Auto-expand the first testing type or show all
-      setTimeout(() => {
-        document.getElementById('test-tag')?.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    } else if (urlParams.get('expand') === 'electronics') {
-      setTimeout(() => {
-        document.getElementById('electronics')?.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    }
-  }, [])
 
   return (
     <div className="pt-20">
-      {/* Services Hero */}
+      {/* Test and Tag Hero */}
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">Our Professional Services</h1>
+          <h1 className="text-5xl font-bold text-white mb-6">Test and Tag Services</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Comprehensive technical solutions for electrical safety, electronics design, and testing compliance across New Zealand.
+            Comprehensive electrical safety testing and compliance certification for all your equipment.
           </p>
         </div>
       </section>
 
-      {/* Detailed Services */}
+      {/* Detailed Service Content */}
       <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
-          <div className="space-y-20">
-            {services.map((service, index) => (
-              <div key={service.id} id={service.id}>
-                <div className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
-                  <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-                    <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
-                    <p className="text-lg text-gray-300 mb-6">{service.description}</p>
-                    
-                    {/* Test & Tag Services with Subsections */}
-                    {service.id === 'test-tag' && service.testingTypes ? (
-                      <div className="space-y-6">
-                        {/* Internal Navigation for Testing Types */}
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {Object.keys(service.testingTypes).map((testingType) => (
-                            <button
-                              key={testingType}
-                              onClick={() => setActiveTestingType(activeTestingType === testingType ? null : testingType)}
-                              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                                activeTestingType === testingType
-                                  ? 'bg-orange-500 text-white'
-                                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                              }`}
-                            >
-                              {testingType}
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Show selected testing type details */}
-                        {activeTestingType && (
-                          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-                            <div className="mb-4">
-                              <h3 className="text-xl font-semibold text-orange-300">{activeTestingType}</h3>
-                            </div>
-                            <p className="text-gray-300 mb-4">{service.testingTypes[activeTestingType].description}</p>
-                            <ul className="space-y-2">
-                              {service.testingTypes[activeTestingType].features.map((feature, featureIndex) => (
-                                <li key={featureIndex} className="flex items-center text-sm">
-                                  <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                                  <span className="text-gray-300">{feature}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {/* Show general features when no specific type is selected */}
-                        {!activeTestingType && (
-                          <ul className="space-y-3">
-                            {service.features.map((feature, featureIndex) => (
-                              <li key={featureIndex} className="flex items-center">
-                                <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                                <span className="text-gray-300">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ) : service.id === 'electronics' && service.designTypes ? (
-                      /* Electronics Design with interactive sections */
-                      <div className="space-y-6">
-                        {/* Internal Navigation for Design Types */}
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {Object.keys(service.designTypes).map((designType) => (
-                            <button
-                              key={designType}
-                              onClick={() => setActiveDesignType(activeDesignType === designType ? null : designType)}
-                              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                                activeDesignType === designType
-                                  ? 'bg-orange-500 text-white'
-                                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                              }`}
-                            >
-                              {designType}
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Show selected design type details */}
-                        {activeDesignType && (
-                          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-                            <div className="mb-4">
-                              <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeDesignType}</h3>
-                            </div>
-                            <p className="text-gray-300 mb-4">{service.designTypes[activeDesignType].description}</p>
-                            <ul className="space-y-2">
-                              {service.designTypes[activeDesignType].features.map((feature, featureIndex) => (
-                                <li key={featureIndex} className="flex items-center text-sm">
-                                  <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                                  <span className="text-gray-300">{feature}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {/* Show general features when no specific type is selected */}
-                        {!activeDesignType && (
-                          <ul className="space-y-3">
-                            {service.features.map((feature, featureIndex) => (
-                              <li key={featureIndex} className="flex items-center">
-                                <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                                <span className="text-gray-300">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    ) : (
-                      /* Show regular features for other services */
-                      <ul className="space-y-3">
-                        {service.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center">
-                            <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                            <span className="text-gray-300">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  
-                  <Button 
-                  size="lg" 
-                  className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
-                  onClick={() => onNavigate('services')}
-                >
-                  Contact Us for Service
-                </Button>
-
-
-                  </div>
-                  <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-                    <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
-                      <img 
-                        src={service.image} 
-                        alt={service.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  </div>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
+              <p className="text-lg text-gray-300 mb-6">{service.description}</p>
+              
+              {/* Test & Tag Services with Subsections */}
+              <div className="space-y-6">
+                {/* Internal Navigation for Testing Types */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {Object.keys(service.testingTypes).map((testingType) => (
+                    <button
+                      key={testingType}
+                      onClick={() => setActiveTestingType(activeTestingType === testingType ? null : testingType)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activeTestingType === testingType
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      {testingType}
+                    </button>
+                  ))}
                 </div>
+
+                {/* Show selected testing type details */}
+                {activeTestingType && (
+                  <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-orange-300">{activeTestingType}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4">{service.testingTypes[activeTestingType].description}</p>
+                    <ul className="space-y-2">
+                      {service.testingTypes[activeTestingType].features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Show general features when no specific type is selected */}
+                {!activeTestingType && (
+                  <ul className="space-y-3">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            ))}
+              
+              <Button 
+                size="lg" 
+                className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                onClick={() => onNavigate('contact')}
+              >
+                Contact Us for Service
+              </Button>
+            </div>
+            <div>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -833,6 +733,179 @@ function ServicesPage({ services, onNavigate }) {
   )
 }
 
+// Electronics Design Page Component
+function ElectronicsDesignPage({ service, onNavigate }) {
+  const [activeDesignType, setActiveDesignType] = useState(null)
+
+  return (
+    <div className="pt-20">
+      {/* Electronics Design Hero */}
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">Electronics Design Services</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Professional PCB design, embedded systems development, and hardware prototyping solutions.
+          </p>
+        </div>
+      </section>
+
+      {/* Detailed Service Content */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
+              <p className="text-lg text-gray-300 mb-6">{service.description}</p>
+              
+              {/* Electronics Design with interactive sections */}
+              <div className="space-y-6">
+                {/* Internal Navigation for Design Types */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {Object.keys(service.designTypes).map((designType) => (
+                    <button
+                      key={designType}
+                      onClick={() => setActiveDesignType(activeDesignType === designType ? null : designType)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activeDesignType === designType
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      {designType}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show selected design type details */}
+                {activeDesignType && (
+                  <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeDesignType}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4">{service.designTypes[activeDesignType].description}</p>
+                    <ul className="space-y-2">
+                      {service.designTypes[activeDesignType].features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Show general features when no specific type is selected */}
+                {!activeDesignType && (
+                  <ul className="space-y-3">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                onClick={() => onNavigate('contact')}
+              >
+                Contact Us for Service
+              </Button>
+            </div>
+            <div>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+// FAQ Page Component
+function FAQPage() {
+  const [openIndex, setOpenIndex] = React.useState(null);
+
+  const faqs = [
+    {
+      question: "What services do you offer?",
+      answer: "We provide Test & Tag services including single-phase, 3-phase, RCD, and microwave leakage testing, as well as Electronics Design services covering PCB design, embedded systems, and hardware prototyping."
+    },
+    {
+      question: "How can I contact you?",
+      answer: "You can reach us by phone at +64 220980511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579."
+    },
+    {
+      question: "What are your business hours?",
+      answer: "We are open Monday to Friday from 8:00 AM to 6:00 PM, and Saturday from 9:00 AM to 4:00 PM. We are closed on Sundays."
+    },
+    {
+      question: "Are your services certified?",
+      answer: "Yes, our services are certified and comply with standards such as AS/NZS 3100, CE, FCC, and EMC, ensuring all testing and design work meets industry regulations and safety requirements."
+    }
+  ];
+
+  return (
+    <div className="pt-20">
+      {/* FAQ Hero */}
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">Frequently Asked Questions</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Find answers to common questions about our services, contact details, and business operations.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Content */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
+          <div className="space-y-8">
+            <Card className="border border-gray-700 shadow-lg bg-gray-800">
+              <CardHeader>
+                <CardTitle className="text-2xl text-orange-400">Common Questions</CardTitle>
+                <CardDescription className="text-sm text-gray-400">
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <div
+                    key={index}
+                    className="border-b border-gray-700 last:border-b-0"
+                  >
+                    <button
+                      onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                      className="w-full text-left p-4 flex justify-between items-center text-white text-lg font-semibold transition-colors hover:text-orange-400 focus:outline-none"
+                    >
+                      {faq.question}
+                      <span className="text-orange-400">
+                        {openIndex === index ? "−" : "+"}
+                      </span>
+                    </button>
+                    {openIndex === index && (
+                      <div className="p-4 pt-0 text-gray-300 text-base">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
 // Contact Page Component
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -980,28 +1053,6 @@ Sent from Trust Technical Services website contact form
                   </div>
                 </CardContent>
               </Card>
-
-              <Card className="border border-gray-700 shadow-lg bg-gray-800">
-                <CardHeader>
-                  <CardTitle className="text-xl text-orange-400">Business Hours</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-white">Monday - Friday</span>
-                      <span className="text-gray-300">8:00 AM - 6:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white">Saturday</span>
-                      <span className="text-gray-300">9:00 AM - 4:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white">Sunday</span>
-                      <span className="text-gray-300">Closed</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </div>
@@ -1100,10 +1151,14 @@ export default function TrustTechnicalApp() {
     switch(activeSection) {
       case 'home':
         return <HomePage onNavigate={handleNavigation} services={services} />
-      case 'about':
+      case 'our-team':
         return <AboutPage />
-      case 'services':
-        return <ServicesPage services={services} onNavigate={handleNavigation} />
+      case 'test-tag':
+        return <TestAndTagPage service={services[0]} onNavigate={handleNavigation} />
+      case 'electronics':
+        return <ElectronicsDesignPage service={services[1]} onNavigate={handleNavigation} />
+      case 'faq':
+        return <FAQPage />
       case 'contact':
         return <ContactPage />
       default:
