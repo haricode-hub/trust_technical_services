@@ -70,7 +70,7 @@ function Navigation({ activeSection, onNavigate }) {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
-            <TrustLogo className="h-8 w-8 text-white" />
+            <TrustLogo className="h-12 w-12 text-white" />
             <span className="text-lg sm:text-xl md:text-2xl font-bold text-white">
               Trust Technical Services
             </span>
