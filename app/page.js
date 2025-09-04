@@ -34,7 +34,7 @@ function Navigation({ activeSection, onNavigate }) {
   { id: 'home', label: 'Home' }, 
   { id: 'test-tag', label: 'Test and Tag' },
   { id: 'electronics', label: 'Electronic Design' },
-  { id: 'digital-solutions', label: 'Digital Solutions' },
+  { id: 'digital-solutions', label: 'Sofware | Web Development' },
   { id: 'our-team', label: 'Our Team' },
   { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'Contact Us' }
@@ -814,7 +814,7 @@ function DigitalSolutionsPage({ service, onNavigate }) {
       {/* Digital Solutions Hero */}
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">Digital Solutions</h1>
+          <h1 className="text-5xl font-bold text-white mb-6">Software Services</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto ">
             Comprehensive web and mobile development services delivering modern, responsive, and user-friendly digital solutions.
           </p>
