@@ -347,7 +347,7 @@ function HomePage({ onNavigate, services }) {
                   {feature.icon}
                 </div>
                 <h3 className="text-2xl font-semibold mb-4 text-white">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed text-justify">
+                <p className="text-gray-300 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -362,7 +362,7 @@ function HomePage({ onNavigate, services }) {
           <h2 className="text-4xl font-bold mb-6">
             Ready to Ensure Your Equipment's Safety?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300 text-justify">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
             Get professional electrical testing, innovative electronics design, and comprehensive safety solutions from Trust Technical Services.
           </p>
           <Button 
