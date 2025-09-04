@@ -34,6 +34,7 @@ function Navigation({ activeSection, onNavigate }) {
   { id: 'home', label: 'Home' }, 
   { id: 'test-tag', label: 'Test and Tag' },
   { id: 'electronics', label: 'Electronic Design' },
+  { id: 'digital-solutions', label: 'Digital Solutions' },
   { id: 'our-team', label: 'Our Team' },
   { id: 'faq', label: 'FAQ' },
   { id: 'contact', label: 'Contact Us' }
@@ -387,7 +388,7 @@ function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-white mb-6">Leadership Excellence</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto text-justify">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto ">
               Meet the visionary leaders driving innovation and excellence in technical solutions
             </p>
           </div>
@@ -618,7 +619,7 @@ function TestAndTagPage({ service, onNavigate }) {
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Test and Tag Services</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto text-justify">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto ">
             Comprehensive electrical safety testing and compliance certification for all your equipment.
           </p>
         </div>
@@ -716,7 +717,7 @@ function ElectronicsDesignPage({ service, onNavigate }) {
       <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Electronics Design Services</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto text-justify">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto ">
             Professional PCB design, embedded systems development, and hardware prototyping solutions.
           </p>
         </div>
@@ -769,6 +770,104 @@ function ElectronicsDesignPage({ service, onNavigate }) {
 
                 {/* Show general features when no specific type is selected */}
                 {!activeDesignType && (
+                  <ul className="space-y-3">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                onClick={() => onNavigate('contact')}
+              >
+                Contact Us for Service
+              </Button>
+            </div>
+            <div>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+// Digital Solutions Page Component
+function DigitalSolutionsPage({ service, onNavigate }) {
+  const [activeSolutionType, setActiveSolutionType] = useState(null)
+
+  return (
+    <div className="pt-20">
+      {/* Digital Solutions Hero */}
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">Digital Solutions</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto ">
+            Comprehensive web and mobile development services delivering modern, responsive, and user-friendly digital solutions.
+          </p>
+        </div>
+      </section>
+
+      {/* Detailed Service Content */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service.description}</p>
+              
+              {/* Digital Solutions with interactive sections */}
+              <div className="space-y-6">
+                {/* Internal Navigation for Solution Types */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {Object.keys(service.solutionTypes).map((solutionType) => (
+                    <button
+                      key={solutionType}
+                      onClick={() => setActiveSolutionType(activeSolutionType === solutionType ? null : solutionType)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activeSolutionType === solutionType
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      {solutionType}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show selected solution type details */}
+                {activeSolutionType && (
+                  <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeSolutionType}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4 text-justify">{service.solutionTypes[activeSolutionType].description}</p>
+                    <ul className="space-y-2">
+                      {service.solutionTypes[activeSolutionType].features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Show general features when no specific type is selected */}
+                {!activeSolutionType && (
                   <ul className="space-y-3">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
@@ -1111,6 +1210,40 @@ export default function TrustTechnicalApp() {
           features: ['AS/NZS 3100, CE, FCC & EMC validation', 'Fault tree analysis & endurance testing', 'Comprehensive performance verification', 'Safety standard compliance', 'Environmental testing coordination', 'Certification support and documentation']
         }
       }
+    },
+    {
+      id: 'digital-solutions',
+      title: 'Digital Solutions',
+      description: 'Comprehensive web and mobile development services delivering modern, responsive, and user-friendly digital solutions tailored to your business needs.',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+      features: [
+        'Web Development - Modern, responsive websites and web applications',
+        'Mobile Development - Native and cross-platform mobile applications',
+        'E-commerce Solutions - Complete online store development and integration',
+        'Custom Software Development - Tailored solutions for business processes'
+      ],
+      solutionTypes: {
+        'Web Development': {
+          description: 'Professional web development services creating modern, responsive, and high-performance websites and web applications. We utilize the latest technologies and frameworks to deliver scalable solutions that meet your business objectives and provide exceptional user experiences.',
+          image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGxhcHRvcHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Responsive web design', 'Modern JavaScript frameworks (React, Next.js)', 'Progressive Web Applications (PWA)', 'Search Engine Optimization (SEO)', 'Performance optimization', 'Cross-browser compatibility']
+        },
+        'Mobile Development': {
+          description: 'Native and cross-platform mobile application development for iOS and Android. We create intuitive, feature-rich mobile apps that provide seamless user experiences while leveraging platform-specific capabilities for optimal performance.',
+          image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Native iOS and Android development', 'Cross-platform solutions (React Native, Flutter)', 'App Store deployment and optimization', 'Push notifications and real-time features', 'Mobile UI/UX design', 'Performance optimization and testing']
+        },
+        'E-commerce Solutions': {
+          description: 'Complete e-commerce development and integration services for businesses looking to establish or enhance their online presence. From custom shopping platforms to payment gateway integration, we deliver comprehensive solutions that drive sales and improve customer satisfaction.',
+          image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBvbmxpbmUlMjBzaG9wcGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Custom e-commerce platforms', 'Payment gateway integration', 'Inventory management systems', 'Shopping cart optimization', 'Multi-platform compatibility', 'Analytics and reporting tools']
+        },
+        'Custom Software Development': {
+          description: 'Tailored software solutions designed to address specific business challenges and streamline operations. We develop custom applications that integrate seamlessly with existing systems while providing scalable, maintainable, and secure solutions.',
+          image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxjdXN0b20lMjBzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Business process automation', 'Database design and optimization', 'API development and integration', 'Cloud-based solutions', 'System architecture planning', 'Ongoing maintenance and support']
+        }
+      }
     }
   ]
 
@@ -1130,6 +1263,8 @@ export default function TrustTechnicalApp() {
         return <TestAndTagPage service={services[0]} onNavigate={handleNavigation} />
       case 'electronics':
         return <ElectronicsDesignPage service={services[1]} onNavigate={handleNavigation} />
+      case 'digital-solutions':
+        return <DigitalSolutionsPage service={services[2]} onNavigate={handleNavigation} />
       case 'faq':
         return <FAQPage />
       case 'contact':
