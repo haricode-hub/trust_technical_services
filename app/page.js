@@ -407,7 +407,7 @@ function AboutPage() {
                   <div>
                     <h3 className="text-3xl font-bold text-white">Salas Jose</h3>
                     <p className="text-xl text-orange-400">Founder & Chief Technology Officer</p>
-                    <p className="text-sm text-gray-400">M.Eng Embedded Systems | NZ Permanent Resident</p>
+                    {/* <p className="text-sm text-gray-400">M.Eng Embedded Systems | NZ Permanent Resident</p> */}
                   </div>
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
@@ -478,7 +478,7 @@ function AboutPage() {
                   <div>
                     <h3 className="text-3xl font-bold text-white">Babitha Kurian</h3>
                     <p className="text-xl text-purple-400">Strategic Advisor & Operations Mentor</p>
-                    <p className="text-sm text-gray-400">BDS | Postgraduate Health Management</p>
+                    {/* <p className="text-sm text-gray-400">BDS | Postgraduate Health Management</p> */}
                   </div>
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
