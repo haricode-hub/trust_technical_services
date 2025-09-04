@@ -1213,7 +1213,7 @@ export default function TrustTechnicalApp() {
     },
     {
       id: 'digital-solutions',
-      title: 'Digital Solutions',
+      title: 'Software Services',
       description: 'Comprehensive web and mobile development services delivering modern, responsive, and user-friendly digital solutions tailored to your business needs.',
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
       features: [
