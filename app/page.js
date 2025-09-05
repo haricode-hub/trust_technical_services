@@ -34,6 +34,7 @@ function Navigation({ activeSection, onNavigate }) {
   { id: 'home', label: 'Home' }, 
   { id: 'test-tag', label: 'Test and Tag' },
   { id: 'electronics', label: 'Electronic Design' },
+  { id: 'automation-services', label: 'Automation Services' },
   { id: 'digital-solutions', label: 'Sofware | Web Development' },
   { id: 'our-team', label: 'Our Team' },
   { id: 'faq', label: 'FAQ' },
@@ -125,7 +126,7 @@ function Footer({ onNavigate }) {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'FAQ', 'Contact'].map((item) => (
+              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'Automation Services', 'FAQ', 'Contact'].map((item) => (
                 <li key={item}>
                   <button 
                     onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
@@ -826,14 +827,14 @@ function DigitalSolutionsPage({ service, onNavigate }) {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service.title}</h2>
-              <p className="text-lg text-gray-300 mb-6 text-justify">{service.description}</p>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service?.title || 'Digital Solutions'}</h2>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service?.description || 'Comprehensive web and mobile development services.'}</p>
               
               {/* Digital Solutions with interactive sections */}
               <div className="space-y-6">
                 {/* Internal Navigation for Solution Types */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {Object.keys(service.solutionTypes).map((solutionType) => (
+                  {service?.solutionTypes && Object.keys(service.solutionTypes).map((solutionType) => (
                     <button
                       key={solutionType}
                       onClick={() => setActiveSolutionType(activeSolutionType === solutionType ? null : solutionType)}
@@ -849,7 +850,7 @@ function DigitalSolutionsPage({ service, onNavigate }) {
                 </div>
 
                 {/* Show selected solution type details */}
-                {activeSolutionType && (
+                {activeSolutionType && service?.solutionTypes?.[activeSolutionType] && (
                   <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
                     <div className="mb-4">
                       <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeSolutionType}</h3>
@@ -867,7 +868,7 @@ function DigitalSolutionsPage({ service, onNavigate }) {
                 )}
 
                 {/* Show general features when no specific type is selected */}
-                {!activeSolutionType && (
+                {!activeSolutionType && service?.features && (
                   <ul className="space-y-3">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
@@ -890,8 +891,106 @@ function DigitalSolutionsPage({ service, onNavigate }) {
             <div>
               <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
                 <img 
-                  src={service.image} 
-                  alt={service.title}
+                  src={service?.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85'} 
+                  alt={service?.title || 'Digital Solutions'}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+// Automation Services Page Component
+function AutomationServicesPage({ service, onNavigate }) {
+  const [activeAutomationType, setActiveAutomationType] = useState(null)
+
+  return (
+    <div className="pt-20">
+      {/* Automation Services Hero */}
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">Automation Services</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Comprehensive industrial automation solutions including PLC programming, SCADA development, and control system integration.
+          </p>
+        </div>
+      </section>
+
+      {/* Detailed Service Content */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service?.title || 'Automation Services'}</h2>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service?.description || 'Comprehensive industrial automation solutions.'}</p>
+              
+              {/* Automation Services with interactive sections */}
+              <div className="space-y-6">
+                {/* Internal Navigation for Automation Types */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {service?.automationTypes && Object.keys(service.automationTypes).map((automationType) => (
+                    <button
+                      key={automationType}
+                      onClick={() => setActiveAutomationType(activeAutomationType === automationType ? null : automationType)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activeAutomationType === automationType
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      {automationType}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show selected automation type details */}
+                {activeAutomationType && service?.automationTypes?.[activeAutomationType] && (
+                  <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-orange-300 mb-3">{activeAutomationType}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4 text-justify">{service.automationTypes[activeAutomationType].description}</p>
+                    <ul className="space-y-2">
+                      {service.automationTypes[activeAutomationType].features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Show general features when no specific type is selected */}
+                {!activeAutomationType && service?.features && (
+                  <ul className="space-y-3">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                onClick={() => onNavigate('contact')}
+              >
+                Contact Us for Service
+              </Button>
+            </div>
+            <div>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src={service?.image || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwYXV0b21hdGlvbnxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85'} 
+                  alt={service?.title || 'Automation Services'}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -1244,6 +1343,64 @@ export default function TrustTechnicalApp() {
           features: ['Business process automation', 'Database design and optimization', 'API development and integration', 'Cloud-based solutions', 'System architecture planning', 'Ongoing maintenance and support']
         }
       }
+    },
+    {
+      id: 'automation-services',
+      title: 'Automation Services',
+      description: 'Comprehensive industrial automation solutions including PLC programming, SCADA development, and control system integration for enhanced operational efficiency.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwYXV0b21hdGlvbnxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+      features: [
+        'PLC Programming & Integration - Custom programming and seamless industrial system integration',
+        'SCADA & HMI Development - Advanced monitoring and control solutions',
+        'Control System Upgrades & Retrofits - Modernizing automation with latest technologies',
+        'Instrumentation & Calibration - Accurate industrial instrument maintenance',
+        'Electrical Testing & Commissioning - Comprehensive MCC and power distribution testing',
+        'Automation Troubleshooting & Maintenance - Fast diagnosis and system optimization',
+        'Project Engineering & Documentation - Complete lifecycle support and FDS documentation',
+        'Training & Knowledge Transfer - Hands-on programs for system operation and maintenance'
+      ],
+      automationTypes: {
+        'PLC Programming & Integration': {
+          description: 'Custom PLC programming, configuration, and seamless integration for industrial systems. We design and implement control logic that ensures optimal performance, safety, and reliability across diverse manufacturing and process industries.',
+          image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwbGMlMjBwcm9ncmFtbWluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Custom control logic development', 'Multi-platform PLC programming (Allen-Bradley, Siemens, Schneider)', 'System integration and commissioning', 'Safety system implementation', 'Remote monitoring capabilities', 'Preventive maintenance programming']
+        },
+        'SCADA & HMI Development': {
+          description: 'Design and development of advanced SCADA and HMI solutions for real-time monitoring and control. Our systems provide intuitive interfaces and comprehensive data visualization for enhanced operational decision-making.',
+          image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxzY2FkYSUyMGhtaXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Real-time data visualization', 'Alarm management systems', 'Historical data trending', 'Remote access capabilities', 'Multi-user security levels', 'Custom reporting and analytics']
+        },
+        'Control System Upgrades & Retrofits': {
+          description: 'Modernizing outdated automation systems with the latest PLC, SCADA, and network technologies. We ensure minimal downtime while upgrading systems to improve efficiency, safety, and compliance.',
+          image: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxjb250cm9sJTIwc3lzdGVtJTIwdXBncmFkZXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Legacy system assessment', 'Migration planning and execution', 'Network infrastructure upgrades', 'Minimal downtime implementation', 'Training on new systems', 'Documentation and support']
+        },
+        'Instrumentation & Calibration': {
+          description: 'Accurate calibration, installation, and maintenance of industrial instruments for reliable operations. We ensure precise measurements and optimal performance of all process instrumentation.',
+          image: 'https://images.unsplash.com/photo-1562813733-b31f71025d54?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxpbnN0cnVtZW50YXRpb24lMjBjYWxpYnJhdGlvbnxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Precision instrument calibration', 'Installation and commissioning', 'Preventive maintenance programs', 'Compliance certification', 'Field device configuration', 'Loop testing and validation']
+        },
+        'Electrical Testing & Commissioning': {
+          description: 'Comprehensive testing and commissioning of MCC panels, power distribution, and protection systems. We ensure electrical systems meet safety standards and operational requirements.',
+          image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVzdGluZ3xlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['MCC panel testing', 'Power distribution verification', 'Protection system validation', 'Electrical safety compliance', 'Load testing and analysis', 'Documentation and certification']
+        },
+        'Automation Troubleshooting & Maintenance': {
+          description: 'Fast and reliable diagnosis, repair, and optimization of automation systems to reduce downtime. Our expert technicians provide 24/7 support to keep your operations running smoothly.',
+          image: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx0cm91Ymxlc2hvb3RpbmclMjBtYWludGVuYW5jZXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['24/7 emergency support', 'Rapid fault diagnosis', 'Preventive maintenance schedules', 'System optimization', 'Spare parts management', 'Performance monitoring']
+        },
+        'Project Engineering & Documentation': {
+          description: 'Complete project lifecycle support — from design, FDS documentation, and integration to execution. We provide comprehensive engineering services ensuring projects are delivered on time and within budget.',
+          image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwZW5naW5lZXJpbmd8ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
+          features: ['Project design and planning', 'Functional Design Specification (FDS)', 'System integration management', 'Quality assurance and testing', 'As-built documentation', 'Project delivery and handover']
+        },
+        'Training & Knowledge Transfer': {
+          description: 'Hands-on training programs to equip teams with the skills to operate and maintain automation systems. We provide comprehensive education to ensure optimal system utilization and reduced dependency.',
+          image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHx0cmFpbmluZyUyMHByb2dyYW18ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
+          features: ['Customized training programs', 'Hands-on practical sessions', 'System operation training', 'Maintenance best practices', 'Troubleshooting techniques', 'Certification and competency assessment']
+        }
+      }
     }
   ]
 
@@ -1263,6 +1420,8 @@ export default function TrustTechnicalApp() {
         return <TestAndTagPage service={services[0]} onNavigate={handleNavigation} />
       case 'electronics':
         return <ElectronicsDesignPage service={services[1]} onNavigate={handleNavigation} />
+      case 'automation-services':
+        return <AutomationServicesPage service={services[3]} onNavigate={handleNavigation} />
       case 'digital-solutions':
         return <DigitalSolutionsPage service={services[2]} onNavigate={handleNavigation} />
       case 'faq':
