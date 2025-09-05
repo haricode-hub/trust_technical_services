@@ -1617,10 +1617,6 @@ export default function TrustTechnicalApp() {
         'Portrait Photography - Professional headshots, family portraits, and personal branding',
         'Commercial Photography - Product photography, architectural shots, and marketing materials',
         'Photo Editing & Retouching - Professional post-processing and digital enhancement',
-        'Drone Photography - Aerial shots and unique perspectives for special projects',
-        'Studio Photography - Controlled environment shoots with professional lighting',
-        'Photo Albums & Prints - High-quality printing and custom photo album creation',
-        'Photography Training - Workshops and courses for aspiring photographers'
       ],
       photographyTypes: {
         'Event Photography': {
@@ -1643,26 +1639,6 @@ export default function TrustTechnicalApp() {
           image: 'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90byUyMGVkaXRpbmd8ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
           features: ['Color correction and enhancement', 'Skin retouching and beauty editing', 'Background removal and replacement', 'Photo restoration and repair', 'Artistic filters and effects', 'Batch processing for large collections']
         },
-        'Drone Photography': {
-          description: 'Cutting-edge aerial photography services using professional drone technology. We capture stunning bird\'s-eye perspectives and unique angles that traditional photography cannot achieve, perfect for real estate, events, and creative projects.',
-          image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxkcm9uZSUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
-          features: ['Aerial real estate photography', 'Construction progress documentation', 'Landscape and scenic aerial shots', 'Event aerial coverage', 'Cinematic drone videography', 'Licensed and insured drone operations']
-        },
-        'Studio Photography': {
-          description: 'Professional studio photography services in a controlled environment with state-of-the-art lighting and equipment. Perfect for portraits, product shots, and creative photography requiring precise lighting and backdrop control.',
-          image: 'https://images.unsplash.com/photo-1554048612-b6a482b224d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxzdHVkaW8lMjBwaG90b2dyYXBoeXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
-          features: ['Professional lighting setups', 'Multiple backdrop options', 'Product photography studio', 'Portrait studio sessions', 'Fashion and beauty photography', 'Creative concept photography']
-        },
-        'Photo Albums & Prints': {
-          description: 'High-quality photo printing and custom album creation services. We transform your digital memories into beautiful physical keepsakes using premium materials and professional printing techniques that ensure longevity and stunning visual quality.',
-          image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90byUyMGFsYnVtfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
-          features: ['Custom photo album design', 'Professional printing services', 'Canvas and fine art prints', 'Wedding album creation', 'Photo book design and printing', 'Archival quality materials']
-        },
-        'Photography Training': {
-          description: 'Comprehensive photography education and training programs for beginners and enthusiasts. Learn fundamental techniques, advanced skills, and professional practices through hands-on workshops and personalized instruction from experienced photographers.',
-          image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90b2dyYXBoeSUyMHRyYWluaW5nfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
-          features: ['Basic photography fundamentals', 'Advanced technique workshops', 'Photo editing software training', 'Business photography courses', 'One-on-one mentoring sessions', 'Equipment and gear guidance']
-        }
       }
     }
   ]
