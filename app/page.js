@@ -296,6 +296,14 @@ function Footer({ onNavigate }) {
 // Home Page Component
 // Home Page Component
 function HomePage({ onNavigate, services }) {
+  // Function to scroll to Software Services card
+  const scrollToServices = () => {
+    const softwareServicesCard = document.getElementById('software-services-card')
+    if (softwareServicesCard) {
+      softwareServicesCard.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+
   const whyChooseUsFeatures = [
     {
       icon: <Shield className="h-8 w-8 text-orange-500" />,
@@ -349,6 +357,14 @@ function HomePage({ onNavigate, services }) {
             Electronics Design
           </Button>
 
+          <Button
+            size="lg"
+            className="bg-gray-700 text-white font-semibold px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg hover:bg-gray-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-gray-600"
+            onClick={scrollToServices}
+          >
+            Other Services
+          </Button>
+
           </div>
         </div>
       </section>
@@ -394,14 +410,18 @@ function HomePage({ onNavigate, services }) {
       </section>
 
       {/* Core Services Section */}
-      <section className="py-16 sm:py-20 bg-gray-900">
+      <section id="core-services" className="py-16 sm:py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 text-white">
             Our Core Services
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {services.map((service) => (
-              <Card key={service.id} className="group hover:shadow-2xl transition-all duration-300 border border-gray-700 shadow-lg bg-gray-800 text-white">
+              <Card 
+                key={service.id} 
+                id={service.id === 'digital-solutions' ? 'software-services-card' : undefined}
+                className="group hover:shadow-2xl transition-all duration-300 border border-gray-700 shadow-lg bg-gray-800 text-white"
+              >
                 <div className="aspect-video overflow-hidden rounded-t-lg">
                   <img 
                     src={service.image} 
