@@ -29,17 +29,24 @@ function TrustLogo({ className = "h-14 w-14" }) {
 // Navigation Component
 function Navigation({ activeSection, onNavigate }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
   
-  const navItems = [
-  { id: 'home', label: 'Home' }, 
-  { id: 'test-tag', label: 'Test and Tag' },
-  { id: 'electronics', label: 'Electronic Design' },
-  { id: 'automation-services', label: 'Automation Services' },
-  { id: 'digital-solutions', label: 'Sofware | Web Development' },
-  { id: 'our-team', label: 'Our Team' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'contact', label: 'Contact Us' }
-]
+  const mainNavItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'our-team', label: 'Our Team' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'contact', label: 'Contact Us' }
+  ]
+
+  const serviceItems = [
+    { id: 'test-tag', label: 'Test & Tag' },
+    { id: 'electronics', label: 'Electronic Design' },
+    { id: 'automation-services', label: 'Automation Services' },
+    { id: 'digital-solutions', label: 'Software | Web Development' },
+    { id: 'elegant-photography', label: 'Elegant Photography' }
+  ]
+
+  const isServiceActive = serviceItems.some(item => item.id === activeSection)
 
   return (
     <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-gray-700 z-50">
@@ -53,8 +60,71 @@ function Navigation({ activeSection, onNavigate }) {
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden lg:flex items-center space-x-8">
+            {/* Home Button */}
+            <button
+              onClick={() => onNavigate('home')}
+              className={`text-sm font-medium transition-colors py-2 ${
+                activeSection === 'home'
+                  ? 'text-orange-400 border-b-2 border-orange-400'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              Home
+            </button>
+            
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                onMouseEnter={() => setIsServicesDropdownOpen(true)}
+                className={`flex items-center text-sm font-medium transition-colors py-2 ${
+                  isServiceActive
+                    ? 'text-orange-400 border-b-2 border-orange-400'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                Our Services
+                <svg 
+                  className={`ml-1 h-4 w-4 transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* Dropdown Menu */}
+              {isServicesDropdownOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50"
+                  onMouseLeave={() => setIsServicesDropdownOpen(false)}
+                >
+                  <div className="py-2">
+                    {serviceItems.map((service) => (
+                      <button
+                        key={service.id}
+                        onClick={() => {
+                          onNavigate(service.id)
+                          setIsServicesDropdownOpen(false)
+                        }}
+                        className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                          activeSection === service.id
+                            ? 'text-orange-400 bg-gray-700'
+                            : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                        }`}
+                      >
+                        {service.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Other Navigation Items */}
+            {mainNavItems.slice(1).map((item) => (
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
@@ -71,7 +141,7 @@ function Navigation({ activeSection, onNavigate }) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-white"
+            className="lg:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,8 +153,45 @@ function Navigation({ activeSection, onNavigate }) {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-700">
-            {navItems.map((item) => (
+          <div className="lg:hidden py-4 border-t border-gray-700">
+            {/* Home Button */}
+            <button
+              onClick={() => {
+                onNavigate('home')
+                setIsMobileMenuOpen(false)
+              }}
+              className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                activeSection === 'home'
+                  ? 'text-orange-400 bg-gray-800'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
+              }`}
+            >
+              Home
+            </button>
+            
+            {/* Mobile Services Section */}
+            <div className="px-4 py-2">
+              <div className="text-orange-400 text-sm font-semibold mb-2">Our Services</div>
+              {serviceItems.map((service) => (
+                <button
+                  key={service.id}
+                  onClick={() => {
+                    onNavigate(service.id)
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                    activeSection === service.id
+                      ? 'text-orange-400 bg-gray-800 rounded'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                  }`}
+                >
+                  {service.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Other Navigation Items */}
+            {mainNavItems.slice(1).map((item) => (
               <button
                 key={item.id}
                 onClick={() => {
@@ -126,7 +233,7 @@ function Footer({ onNavigate }) {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'Automation Services', 'FAQ', 'Contact'].map((item) => (
+              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'Automation Services', 'Elegant Photography', 'FAQ', 'Contact'].map((item) => (
                 <li key={item}>
                   <button 
                     onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
@@ -1002,6 +1109,104 @@ function AutomationServicesPage({ service, onNavigate }) {
   )
 }
 
+// Elegant Photography Page Component
+function ElegantPhotographyPage({ service, onNavigate }) {
+  const [activePhotographyType, setActivePhotographyType] = useState(null)
+
+  return (
+    <div className="pt-20">
+      {/* Elegant Photography Hero */}
+      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">Elegant Photography</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Professional photography services capturing life's precious moments with artistic excellence and technical precision.
+          </p>
+        </div>
+      </section>
+
+      {/* Detailed Service Content */}
+      <section className="py-20 bg-black">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-orange-400 mb-4">{service?.title || 'Elegant Photography'}</h2>
+              <p className="text-lg text-gray-300 mb-6 text-justify">{service?.description || 'Professional photography services for all occasions.'}</p>
+              
+              {/* Photography Services with interactive sections */}
+              <div className="space-y-6">
+                {/* Internal Navigation for Photography Types */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {service?.photographyTypes && Object.keys(service.photographyTypes).map((photographyType) => (
+                    <button
+                      key={photographyType}
+                      onClick={() => setActivePhotographyType(activePhotographyType === photographyType ? null : photographyType)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activePhotographyType === photographyType
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
+                    >
+                      {photographyType}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show selected photography type details */}
+                {activePhotographyType && service?.photographyTypes?.[activePhotographyType] && (
+                  <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-semibold text-orange-300 mb-3">{activePhotographyType}</h3>
+                    </div>
+                    <p className="text-gray-300 mb-4 text-justify">{service.photographyTypes[activePhotographyType].description}</p>
+                    <ul className="space-y-2">
+                      {service.photographyTypes[activePhotographyType].features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Show general features when no specific type is selected */}
+                {!activePhotographyType && service?.features && (
+                  <ul className="space-y-3">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="mt-8 bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
+                onClick={() => onNavigate('contact')}
+              >
+                Contact Us for Service
+              </Button>
+            </div>
+            <div>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src={service?.image || 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwaG90b2dyYXBoeXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85'} 
+                  alt={service?.title || 'Elegant Photography'}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 // FAQ Page Component
 function FAQPage() {
   const [openIndex, setOpenIndex] = React.useState(null);
@@ -1401,6 +1606,64 @@ export default function TrustTechnicalApp() {
           features: ['Customized training programs', 'Hands-on practical sessions', 'System operation training', 'Maintenance best practices', 'Troubleshooting techniques', 'Certification and competency assessment']
         }
       }
+    },
+    {
+      id: 'elegant-photography',
+      title: 'Elegant Photography',
+      description: 'Professional photography services capturing life\'s precious moments with artistic excellence and technical precision for events, portraits, commercial projects, and specialized photography needs.',
+      image: 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwaG90b2dyYXBoeXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+      features: [
+        'Event Photography - Weddings, corporate events, celebrations, and special occasions',
+        'Portrait Photography - Professional headshots, family portraits, and personal branding',
+        'Commercial Photography - Product photography, architectural shots, and marketing materials',
+        'Photo Editing & Retouching - Professional post-processing and digital enhancement',
+        'Drone Photography - Aerial shots and unique perspectives for special projects',
+        'Studio Photography - Controlled environment shoots with professional lighting',
+        'Photo Albums & Prints - High-quality printing and custom photo album creation',
+        'Photography Training - Workshops and courses for aspiring photographers'
+      ],
+      photographyTypes: {
+        'Event Photography': {
+          description: 'Comprehensive event photography services capturing every important moment of your special occasions. From intimate gatherings to large corporate events, we ensure every emotion, detail, and milestone is beautifully preserved with professional quality and artistic vision.',
+          image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxldmVudCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Wedding photography and videography', 'Corporate event documentation', 'Birthday and anniversary celebrations', 'Live event coverage', 'Candid moment capture', 'Same-day photo delivery options']
+        },
+        'Portrait Photography': {
+          description: 'Professional portrait photography services creating stunning individual and group portraits. We specialize in capturing personality, character, and authentic expressions through expert lighting, composition, and post-processing techniques.',
+          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Professional headshots for business', 'Family portrait sessions', 'Individual portrait photography', 'Graduation and milestone portraits', 'Creative artistic portraits', 'LinkedIn and social media profile photos']
+        },
+        'Commercial Photography': {
+          description: 'High-quality commercial photography services for businesses and brands. We create compelling visual content that enhances marketing materials, websites, and promotional campaigns with professional-grade equipment and creative expertise.',
+          image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxjb21tZXJjaWFsJTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
+          features: ['Product photography for e-commerce', 'Architectural and interior photography', 'Corporate branding photography', 'Marketing campaign visuals', 'Food and beverage photography', 'Industrial and manufacturing documentation']
+        },
+        'Photo Editing & Retouching': {
+          description: 'Professional photo editing and retouching services transforming your images with precision and artistry. Using industry-standard software and techniques, we enhance, restore, and perfect your photographs while maintaining natural authenticity.',
+          image: 'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90byUyMGVkaXRpbmd8ZW58MHx8fHwxNzU2MjI3NDUyfDA&ixlib=rb-4.1.0&q=85',
+          features: ['Color correction and enhancement', 'Skin retouching and beauty editing', 'Background removal and replacement', 'Photo restoration and repair', 'Artistic filters and effects', 'Batch processing for large collections']
+        },
+        'Drone Photography': {
+          description: 'Cutting-edge aerial photography services using professional drone technology. We capture stunning bird\'s-eye perspectives and unique angles that traditional photography cannot achieve, perfect for real estate, events, and creative projects.',
+          image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxkcm9uZSUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Aerial real estate photography', 'Construction progress documentation', 'Landscape and scenic aerial shots', 'Event aerial coverage', 'Cinematic drone videography', 'Licensed and insured drone operations']
+        },
+        'Studio Photography': {
+          description: 'Professional studio photography services in a controlled environment with state-of-the-art lighting and equipment. Perfect for portraits, product shots, and creative photography requiring precise lighting and backdrop control.',
+          image: 'https://images.unsplash.com/photo-1554048612-b6a482b224d1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxzdHVkaW8lMjBwaG90b2dyYXBoeXxlbnwwfHx8fDE3NTYyMjc0NTJ8MA&ixlib=rb-4.1.0&q=85',
+          features: ['Professional lighting setups', 'Multiple backdrop options', 'Product photography studio', 'Portrait studio sessions', 'Fashion and beauty photography', 'Creative concept photography']
+        },
+        'Photo Albums & Prints': {
+          description: 'High-quality photo printing and custom album creation services. We transform your digital memories into beautiful physical keepsakes using premium materials and professional printing techniques that ensure longevity and stunning visual quality.',
+          image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90byUyMGFsYnVtfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Custom photo album design', 'Professional printing services', 'Canvas and fine art prints', 'Wedding album creation', 'Photo book design and printing', 'Archival quality materials']
+        },
+        'Photography Training': {
+          description: 'Comprehensive photography education and training programs for beginners and enthusiasts. Learn fundamental techniques, advanced skills, and professional practices through hands-on workshops and personalized instruction from experienced photographers.',
+          image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxwaG90b2dyYXBoeSUyMHRyYWluaW5nfGVufDB8fHx8MTc1NjIyNzQ1Mnww&ixlib=rb-4.1.0&q=85',
+          features: ['Basic photography fundamentals', 'Advanced technique workshops', 'Photo editing software training', 'Business photography courses', 'One-on-one mentoring sessions', 'Equipment and gear guidance']
+        }
+      }
     }
   ]
 
@@ -1424,6 +1687,8 @@ export default function TrustTechnicalApp() {
         return <AutomationServicesPage service={services[3]} onNavigate={handleNavigation} />
       case 'digital-solutions':
         return <DigitalSolutionsPage service={services[2]} onNavigate={handleNavigation} />
+      case 'elegant-photography':
+        return <ElegantPhotographyPage service={services[4]} onNavigate={handleNavigation} />
       case 'faq':
         return <FAQPage />
       case 'contact':
