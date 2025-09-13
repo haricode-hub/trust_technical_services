@@ -447,22 +447,18 @@ function Footer({ onNavigate }) {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'Automation Services', 'Elegant Photography', 'FAQ', 'Contact'].map((item) => (
-                <li key={item}>
-                  {item === 'Our Team' ? (
-                    <Link href="/about" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
-                  ) : item === 'FAQ' ? (
-                    <Link href="/faq" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
-                  ) : item === 'Contact' ? (
-                    <Link href="/contact" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
-                  ) : (
-                    <button 
-                      onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
-                      className="text-gray-400 hover:text-white transition-colors block"
-                    >
-                      {item}
-                    </button>
-                  )}
+              {[ 
+                { label: 'Home', href: '/' },
+                { label: 'Our Team', href: '/about' },
+                { label: 'Test and Tag', href: '/test-tag' },
+                { label: 'Electronic Design', href: '/electronics' },
+                { label: 'Automation Services', href: '/automation-services' },
+                { label: 'Elegant Photography', href: '/elegant-photography' },
+                { label: 'FAQ', href: '/faq' },
+                { label: 'Contact', href: '/contact' }
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors block">{item.label}</Link>
                 </li>
               ))}
             </ul>

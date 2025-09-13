@@ -44,6 +44,7 @@ function Navigation() {
   const goTo = (id) => {
     if (id === 'home') return router.push('/')
     if (id === 'our-team') return router.push('/about')
+    if (id === 'contact') return router.push('/contact')
     return router.push(`/?go=${encodeURIComponent(id)}`)
   }
 
@@ -184,6 +185,16 @@ function Navigation() {
                 >
                   {item.label}
                 </Link>
+              ) : item.id === 'contact' ? (
+                <Link
+                  key={item.id}
+                  href="/contact"
+                  className={`text-sm font-medium transition-colors py-2 ${
+                    activeSection === item.id ? 'text-orange-400 border-b-2 border-orange-400' : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
               ) : (
                 <button
                   key={item.id}
@@ -316,6 +327,17 @@ function Navigation() {
                 >
                   {item.label}
                 </Link>
+              ) : item.id === 'contact' ? (
+                <Link
+                  key={item.id}
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                    activeSection === item.id ? 'text-orange-400 bg-gray-800' : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }`}
+                >
+                  {item.label}
+                </Link>
               ) : (
                 <button
                   key={item.id}
@@ -339,47 +361,16 @@ function Navigation() {
 }
 
 function Footer() {
-  const router = useRouter()
   const quickLinks = [
-    'Home',
-    'Our Team',
-    'Test and Tag',
-    'Electronic Design',
-    'Automation Services',
-    'Elegant Photography',
-    'FAQ',
-    'Contact',
+    { label: 'Home', href: '/' },
+    { label: 'Our Team', href: '/about' },
+    { label: 'Test and Tag', href: '/test-tag' },
+    { label: 'Electronic Design', href: '/electronics' },
+    { label: 'Automation Services', href: '/automation-services' },
+    { label: 'Elegant Photography', href: '/elegant-photography' },
+    { label: 'FAQ', href: '/faq' },
+    { label: 'Contact', href: '/contact' },
   ]
-
-  const toId = (label) => {
-    switch (label) {
-      case 'Home':
-        return 'home'
-      case 'Our Team':
-        return 'our-team'
-      case 'Test and Tag':
-        return 'test-tag'
-      case 'Electronic Design':
-        return 'electronics'
-      case 'Automation Services':
-        return 'automation-services'
-      case 'Elegant Photography':
-        return 'elegant-photography'
-      case 'FAQ':
-        return 'faq'
-      case 'Contact':
-        return 'contact'
-      default:
-        return label.toLowerCase().replace(' ', '-')
-    }
-  }
-
-  const handleQuickLink = (label) => {
-    const id = toId(label)
-    if (id === 'home') return router.push('/')
-    if (id === 'our-team') return router.push('/about')
-    return router.push(`/?go=${encodeURIComponent(id)}`)
-  }
 
   return (
     <footer className="bg-gray-900 text-white py-12 sm:py-16 border-t border-gray-700">
@@ -399,10 +390,10 @@ function Footer() {
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               {quickLinks.map((item) => (
-                <li key={item}>
-                  <button onClick={() => handleQuickLink(item)} className="text-gray-400 hover:text-white transition-colors block">
-                    {item}
-                  </button>
+                <li key={item.href}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors block">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
