@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -103,20 +104,87 @@ function Navigation({ activeSection, onNavigate }) {
                 >
                   <div className="py-2">
                     {serviceItems.map((service) => (
-                      <button
-                        key={service.id}
-                        onClick={() => {
-                          onNavigate(service.id)
-                          setIsServicesDropdownOpen(false)
-                        }}
-                        className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
-                          activeSection === service.id
-                            ? 'text-orange-400 bg-gray-700'
-                            : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                        }`}
-                      >
-                        {service.label}
-                      </button>
+                      service.id === 'test-tag' ? (
+                        <Link
+                          key={service.id}
+                          href="/test-tag"
+                          onClick={() => setIsServicesDropdownOpen(false)}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </Link>
+                      ) : service.id === 'electronics' ? (
+                        <Link
+                          key={service.id}
+                          href="/electronics"
+                          onClick={() => setIsServicesDropdownOpen(false)}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </Link>
+                      ) : service.id === 'digital-solutions' ? (
+                        <Link
+                          key={service.id}
+                          href="/digital-solutions"
+                          onClick={() => setIsServicesDropdownOpen(false)}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </Link>
+                      ) : service.id === 'automation-services' ? (
+                        <Link
+                          key={service.id}
+                          href="/automation-services"
+                          onClick={() => setIsServicesDropdownOpen(false)}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </Link>
+                      ) : service.id === 'elegant-photography' ? (
+                        <Link
+                          key={service.id}
+                          href="/elegant-photography"
+                          onClick={() => setIsServicesDropdownOpen(false)}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </Link>
+                      ) : (
+                        <button
+                          key={service.id}
+                          onClick={() => {
+                            onNavigate(service.id)
+                            setIsServicesDropdownOpen(false)
+                          }}
+                          className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                            activeSection === service.id
+                              ? 'text-orange-400 bg-gray-700'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                          }`}
+                        >
+                          {service.label}
+                        </button>
+                      )
                     ))}
                   </div>
                 </div>
@@ -125,17 +193,55 @@ function Navigation({ activeSection, onNavigate }) {
 
             {/* Other Navigation Items */}
             {mainNavItems.slice(1).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => onNavigate(item.id)}
-                className={`text-sm font-medium transition-colors py-2 ${
-                  activeSection === item.id
-                    ? 'text-orange-400 border-b-2 border-orange-400'
-                    : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </button>
+              item.id === 'our-team' ? (
+                <Link
+                  key={item.id}
+                  href="/about"
+                  className={`text-sm font-medium transition-colors py-2 ${
+                    activeSection === item.id
+                      ? 'text-orange-400 border-b-2 border-orange-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : item.id === 'faq' ? (
+                <Link
+                  key={item.id}
+                  href="/faq"
+                  className={`text-sm font-medium transition-colors py-2 ${
+                    activeSection === item.id
+                      ? 'text-orange-400 border-b-2 border-orange-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : item.id === 'contact' ? (
+                <Link
+                  key={item.id}
+                  href="/contact"
+                  className={`text-sm font-medium transition-colors py-2 ${
+                    activeSection === item.id
+                      ? 'text-orange-400 border-b-2 border-orange-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => onNavigate(item.id)}
+                  className={`text-sm font-medium transition-colors py-2 ${
+                    activeSection === item.id
+                      ? 'text-orange-400 border-b-2 border-orange-400'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </div>
 
@@ -173,39 +279,147 @@ function Navigation({ activeSection, onNavigate }) {
             <div className="px-4 py-2">
               <div className="text-orange-400 text-sm font-semibold mb-2">Our Services</div>
               {serviceItems.map((service) => (
-                <button
-                  key={service.id}
-                  onClick={() => {
-                    onNavigate(service.id)
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
-                    activeSection === service.id
-                      ? 'text-orange-400 bg-gray-800 rounded'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
-                  }`}
-                >
-                  {service.label}
-                </button>
+                service.id === 'test-tag' ? (
+                  <Link
+                    key={service.id}
+                    href="/test-tag"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </Link>
+                ) : service.id === 'electronics' ? (
+                  <Link
+                    key={service.id}
+                    href="/electronics"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </Link>
+                ) : service.id === 'digital-solutions' ? (
+                  <Link
+                    key={service.id}
+                    href="/digital-solutions"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </Link>
+                ) : service.id === 'automation-services' ? (
+                  <Link
+                    key={service.id}
+                    href="/automation-services"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </Link>
+                ) : service.id === 'elegant-photography' ? (
+                  <Link
+                    key={service.id}
+                    href="/elegant-photography"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={service.id}
+                    onClick={() => {
+                      onNavigate(service.id)
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                      activeSection === service.id
+                        ? 'text-orange-400 bg-gray-800 rounded'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 rounded'
+                    }`}
+                  >
+                    {service.label}
+                  </button>
+                )
               ))}
             </div>
 
             {/* Other Navigation Items */}
             {mainNavItems.slice(1).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  onNavigate(item.id)
-                  setIsMobileMenuOpen(false)
-                }}
-                className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
-                  activeSection === item.id
-                    ? 'text-orange-400 bg-gray-800'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
-                }`}
-              >
-                {item.label}
-              </button>
+              item.id === 'our-team' ? (
+                <Link
+                  key={item.id}
+                  href="/about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-orange-400 bg-gray-800'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : item.id === 'faq' ? (
+                <Link
+                  key={item.id}
+                  href="/faq"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-orange-400 bg-gray-800'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : item.id === 'contact' ? (
+                <Link
+                  key={item.id}
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-orange-400 bg-gray-800'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    onNavigate(item.id)
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-orange-400 bg-gray-800'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </div>
         )}
@@ -235,12 +449,20 @@ function Footer({ onNavigate }) {
             <ul className="space-y-2 text-sm">
               {['Home', 'Our Team', 'Test and Tag', 'Electronic Design', 'Automation Services', 'Elegant Photography', 'FAQ', 'Contact'].map((item) => (
                 <li key={item}>
-                  <button 
-                    onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
-                    className="text-gray-400 hover:text-white transition-colors block"
-                  >
-                    {item}
-                  </button>
+                  {item === 'Our Team' ? (
+                    <Link href="/about" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
+                  ) : item === 'FAQ' ? (
+                    <Link href="/faq" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
+                  ) : item === 'Contact' ? (
+                    <Link href="/contact" className="text-gray-400 hover:text-white transition-colors block">{item}</Link>
+                  ) : (
+                    <button 
+                      onClick={() => onNavigate(item.toLowerCase().replace(' ', '-'))}
+                      className="text-gray-400 hover:text-white transition-colors block"
+                    >
+                      {item}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -1662,6 +1884,18 @@ export default function TrustTechnicalApp() {
       }
     }
   ]
+
+  // Optional: respond to query param `?go=` so deep-links from the About page can focus a section
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const go = params.get('go')
+    if (go) {
+      setActiveSection(go)
+      window.history.replaceState({}, '', window.location.pathname)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [])
 
   const handleNavigation = (section) => {
     setActiveSection(section)
