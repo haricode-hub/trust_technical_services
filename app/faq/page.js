@@ -280,9 +280,12 @@ function Footer() {
 }
 
 function FAQContent() {
-  const [openIndex, setOpenIndex] = useState(null)
+  // Manage open indices per section to keep sections independent
+  const [openGeneral, setOpenGeneral] = useState(null)
+  const [openTesting, setOpenTesting] = useState(null)
+  const [openSafety, setOpenSafety] = useState(null)
 
-  const faqs = [
+  const generalFaqs = [
     {
       question: 'What services do you offer?',
       answer:
@@ -320,7 +323,68 @@ function FAQContent() {
         </span>
       ),
     },
+    {
+      question: 'What does “Test & Tag” mean?',
+      answer:
+        'It’s the process of visually inspecting and electrically testing portable appliances and leads, then attaching a tag that records the result and the next test due date. This helps keep people safe and supports workplace compliance.',
+    },
+    {
+      question: 'Who needs Test & Tag services?',
+      answer:
+        'Workplaces, schools, hire equipment providers, and public venues generally require regular testing to reduce electrical risk to staff, customers, and visitors. Many organisations include it as part of their compliance and insurance requirements.',
+    },
   ]
+
+  const testingTypeFaqs = [
+    {
+      question: 'How often should equipment be tested?',
+      answer:
+        'Retest intervals depend on the environment and level of use—high‑use or harsh conditions typically need more frequent checks than low‑risk office spaces. Follow your health & safety policy and applicable NZ standards; we can help set a schedule that suits your site.',
+    },
+    {
+      question: 'What’s the difference between single-phase and three-phase testing?',
+      answer:
+        'Single-phase testing covers common appliances and leads found in offices and homes, while three-phase testing applies to heavier industrial equipment. The principles are similar, but three-phase equipment typically demands higher current handling and additional checks for safe operation.',
+    },
+  ]
+
+  const safetyDeviceFaqs = [
+    {
+      question: 'What does RCD testing cover?',
+      answer:
+        'RCD (Residual Current Device) testing verifies that safety switches trip correctly and within the required time at specified fault currents. This helps protect people from electric shock and reduces fire risk by ensuring the device cuts power when a leakage to earth is detected.',
+    },
+    {
+      question: 'What happens if equipment fails a test?',
+      answer:
+        'If an item fails, it should be removed from service immediately. We’ll identify the issue, advise if repair is feasible (e.g., cord or plug replacement), and retest it once fixed. If it cannot be made safe, it should be clearly labeled and disposed of according to your safety policy.',
+    },
+  ]
+
+  const Section = ({ title, items, openIndex, setOpenIndex }) => (
+    <Card className="border border-gray-700 shadow-lg bg-gray-800">
+      <CardHeader>
+        <CardTitle className="text-2xl text-orange-400">{title}</CardTitle>
+        <CardDescription className="text-sm text-gray-400"></CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {items.map((faq, index) => (
+          <div key={index} className="border-b border-gray-700 last:border-b-0">
+            <button
+              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              className="w-full text-left p-4 flex justify-between items-center text-white text-lg font-semibold transition-colors hover:text-orange-400 focus:outline-none"
+            >
+              {faq.question}
+              <span className="text-orange-400">{openIndex === index ? '−' : '+'}</span>
+            </button>
+            {openIndex === index && (
+              <div className="p-4 pt-0 text-gray-300 text-base">{faq.answer}</div>
+            )}
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  )
 
   return (
     <div className="pt-20">
@@ -329,7 +393,7 @@ function FAQContent() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-white mb-6">Frequently Asked Questions</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Find answers to common questions about our services, contact details, and business operations.
+            Find answers to common questions about our services and electrical safety.
           </p>
         </div>
       </section>
@@ -338,28 +402,24 @@ function FAQContent() {
       <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
           <div className="space-y-8">
-            <Card className="border border-gray-700 shadow-lg bg-gray-800">
-              <CardHeader>
-                <CardTitle className="text-2xl text-orange-400">Common Questions</CardTitle>
-                <CardDescription className="text-sm text-gray-400"></CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <div key={index} className="border-b border-gray-700 last:border-b-0">
-                    <button
-                      onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                      className="w-full text-left p-4 flex justify-between items-center text-white text-lg font-semibold transition-colors hover:text-orange-400 focus:outline-none"
-                    >
-                      {faq.question}
-                      <span className="text-orange-400">{openIndex === index ? '−' : '+'}</span>
-                    </button>
-                    {openIndex === index && (
-                      <div className="p-4 pt-0 text-gray-300 text-base">{faq.answer}</div>
-                    )}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+            <Section
+              title="General"
+              items={generalFaqs}
+              openIndex={openGeneral}
+              setOpenIndex={setOpenGeneral}
+            />
+            <Section
+              title="Testing Types"
+              items={testingTypeFaqs}
+              openIndex={openTesting}
+              setOpenIndex={setOpenTesting}
+            />
+            <Section
+              title="Safety Devices"
+              items={safetyDeviceFaqs}
+              openIndex={openSafety}
+              setOpenIndex={setOpenSafety}
+            />
           </div>
         </div>
       </section>
