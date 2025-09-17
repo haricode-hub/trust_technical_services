@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { CheckCircle } from 'lucide-react'
 
 function TrustLogo({ className = 'h-14 w-14' }) {
@@ -548,6 +547,35 @@ function TestAndTagContent() {
                 <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section (just above footer, aligned with left column) */}
+      <section id="faq" className="py-16 bg-black/95 border-t border-gray-800">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-6">FAQ</h2>
+              <div className="space-y-4">
+                <div className="rounded-lg border border-gray-700 bg-gray-900 p-5">
+                  <h3 className="text-lg font-semibold text-orange-400">Do you have videos that explain Test & Tag topics?</h3>
+                  <p className="mt-2 text-gray-300">
+                    Yes. We regularly post short, helpful videos covering Test & Tag best practices, safety tips, and common questions. Watch them on our YouTube channel:
+                    <a
+                      href="https://youtube.com/@tts-nz?si=2Ds8JRh8K3LZDUsW"
+                      className="ml-2 text-orange-400 underline hover:text-orange-300"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      youtube.com/@tts-nz
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Right column left intentionally empty to align FAQ with service text column */}
+            <div className="hidden md:block" />
           </div>
         </div>
       </section>

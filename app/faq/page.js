@@ -303,6 +303,23 @@ function FAQContent() {
       answer:
         'Yes, our services are certified and comply with standards such as AS/NZS 3100, CE, FCC, and EMC, ensuring all testing and design work meets industry regulations and safety requirements.',
     },
+    {
+      question: 'Do you have videos that explain Test & Tag topics?',
+      answer: (
+        <span>
+          Yes. We regularly post short, helpful videos covering Test & Tag best practices, safety tips, and common questions. Watch them on our YouTube channel:
+          {' '}
+          <a
+            href="https://youtube.com/@tts-nz?si=2Ds8JRh8K3LZDUsW"
+            className="text-orange-400 underline hover:text-orange-300"
+            target="_blank"
+            rel="noreferrer"
+          >
+            youtube.com/@tts-nz
+          </a>
+        </span>
+      ),
+    },
   ]
 
   return (
