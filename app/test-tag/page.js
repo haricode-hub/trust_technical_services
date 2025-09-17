@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -463,6 +463,73 @@ const testTagService = {
 function TestAndTagContent() {
   const [activeTestingType, setActiveTestingType] = useState(null)
   const service = testTagService
+  // Explicit list of FAQ video embeds (first is correct as-is; second updated per provided link)
+  const faqVideos = [
+    {
+      src: 'https://www.youtube.com/embed/9PMviRNumIk',
+      title: 'FAQ Video 1',
+      oembedUrl: 'https://www.youtube.com/watch?v=9PMviRNumIk',
+    },
+    {
+      src: 'https://www.youtube.com/embed/OrF0vCqlyEI',
+      title: 'FAQ Video 2',
+      oembedUrl: 'https://www.youtube.com/watch?v=OrF0vCqlyEI',
+    },
+    {
+      src: 'https://www.youtube.com/embed/TeIOu4NfK9M',
+      title: 'FAQ Video 3',
+      oembedUrl: 'https://www.youtube.com/watch?v=TeIOu4NfK9M',
+    },
+    {
+      src: 'https://www.youtube.com/embed/PBBZYi6pZj0',
+      title: 'FAQ Video 4',
+      oembedUrl: 'https://www.youtube.com/watch?v=PBBZYi6pZj0',
+    },
+    {
+      src: 'https://www.youtube.com/embed/3313KhcWezg',
+      title: 'FAQ Video 5',
+      oembedUrl: 'https://www.youtube.com/watch?v=3313KhcWezg',
+    },
+    {
+      src: 'https://www.youtube.com/embed/P8N-F-PquS8',
+      title: 'FAQ Video 6',
+      oembedUrl: 'https://www.youtube.com/watch?v=P8N-F-PquS8',
+    },
+    // Add more entries as provided: { src: 'https://www.youtube.com/embed/<VIDEO_ID>', title: 'FAQ Video N', oembedUrl: 'https://www.youtube.com/watch?v=<VIDEO_ID>' }
+  ]
+
+  // Resolve each video's actual YouTube title via oEmbed, with safe fallbacks
+  const [resolvedTitles, setResolvedTitles] = useState(faqVideos.map((v) => v.title))
+
+  useEffect(() => {
+    let isCancelled = false
+    const fetchTitles = async () => {
+      try {
+        const results = await Promise.all(
+          faqVideos.map(async (v) => {
+            if (!v.oembedUrl) return v.title
+            const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(v.oembedUrl)}&format=json`
+            try {
+              const res = await fetch(endpoint)
+              if (!res.ok) throw new Error(`oEmbed HTTP ${res.status}`)
+              const data = await res.json()
+              return typeof data?.title === 'string' && data.title.trim().length > 0 ? data.title : v.title
+            } catch (err) {
+              return v.title
+            }
+          })
+        )
+        if (!isCancelled) setResolvedTitles(results)
+      } catch (_) {
+        // Swallow and keep defaults
+      }
+    }
+    fetchTitles()
+    return () => {
+      isCancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="pt-20">
@@ -551,31 +618,31 @@ function TestAndTagContent() {
         </div>
       </section>
 
-      {/* FAQ Section (just above footer, aligned with left column) */}
+      {/* FAQ Videos Gallery (Embedded Playlist) */}
       <section id="faq" className="py-16 bg-black/95 border-t border-gray-800">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-6">FAQ</h2>
-              <div className="space-y-4">
-                <div className="rounded-lg border border-gray-700 bg-gray-900 p-5">
-                  <h3 className="text-lg font-semibold text-orange-400">Do you have videos that explain Test & Tag topics?</h3>
-                  <p className="mt-2 text-gray-300">
-                    Yes. We regularly post short, helpful videos covering Test & Tag best practices, safety tips, and common questions. Watch them on our YouTube channel:
-                    <a
-                      href="https://youtube.com/@tts-nz?si=2Ds8JRh8K3LZDUsW"
-                      className="ml-2 text-orange-400 underline hover:text-orange-300"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      youtube.com/@tts-nz
-                    </a>
+          <h2 className="text-3xl font-bold text-white mb-6">FAQ Videos</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {faqVideos.map((vid, idx) => (
+              <div key={idx} className="group rounded-xl overflow-hidden border border-gray-700 bg-gray-900 shadow transition-shadow hover:shadow-orange-500/10">
+                <div className="aspect-video">
+                  <iframe
+                    src={vid.src}
+                    title={resolvedTitles[idx] || vid.title}
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="px-3 py-3 border-t border-gray-800 bg-gray-900/80">
+                  <p className="text-sm text-gray-300 truncate" title={resolvedTitles[idx] || vid.title}>
+                    {resolvedTitles[idx] || vid.title}
                   </p>
                 </div>
               </div>
-            </div>
-            {/* Right column left intentionally empty to align FAQ with service text column */}
-            <div className="hidden md:block" />
+            ))}
           </div>
         </div>
       </section>
