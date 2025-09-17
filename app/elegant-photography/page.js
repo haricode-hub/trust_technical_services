@@ -363,6 +363,43 @@ function PhotographyContent() {
         </div>
       </section>
 
+      {/* Gallery Section */}
+      <section className="py-16 bg-black/95">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-200">
+              Gallery
+            </h2>
+            <p className="text-gray-300 text-lg leading-relaxed">
+              A curated selection of moments showcasing our style, attention to detail, and commitment to visual storytelling.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 7 }).map((_, i) => {
+              const num = i + 1
+              return (
+                <div
+                  key={num}
+                  className="group relative overflow-hidden rounded-xl bg-gray-800/60 border border-gray-700/60 shadow-lg transition-all duration-300 hover:shadow-orange-500/20"
+                >
+                  <div className="aspect-[4/3] w-full overflow-hidden">
+                    <img
+                      src={`/photo_${num}.jpg`}
+                      alt={`Photography sample ${num}`}
+                      className="h-full w-full object-cover object-center transform transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading={num > 3 ? 'lazy' : 'eager'}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Details */}
       <section className="py-20 bg-black">
         <div className="container mx-auto px-4">
