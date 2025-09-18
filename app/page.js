@@ -493,9 +493,9 @@ function Footer({ onNavigate }) {
               © 2025 Trust Technical Services. All rights reserved.
             </p>
             <div className="flex space-x-4 sm:space-x-6">
-              <button className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+              <Link href="/privacy-policy" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors underline underline-offset-4">
                 Privacy Policy
-              </button>
+              </Link>
               <button className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
                 Legal Notice
               </button>

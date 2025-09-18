@@ -272,6 +272,11 @@ function Footer() {
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
             <p className="text-gray-400 text-sm">Email: salaskjose@gmail.com</p>
             <p className="text-gray-400 text-sm">Phone: +64 22 150 3679</p>
+            <div className="mt-4">
+              <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-orange-400 underline underline-offset-4">
+                Privacy Policy
+              </a>
+            </div>
           </div>
         </div>
       </div>
