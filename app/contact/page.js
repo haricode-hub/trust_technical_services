@@ -255,7 +255,7 @@ function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
             <p className="text-gray-400 text-sm">Email: salaskjose@gmail.com</p>
-            <p className="text-gray-400 text-sm">Phone: +64 22 150 3679</p>
+            <p className="text-gray-400 text-sm">Phone: 022 098 0511</p>
             <div className="mt-4">
               <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-orange-400 underline underline-offset-4">
                 Privacy Policy
@@ -269,26 +269,42 @@ function Footer() {
 }
 
 function ContactContent() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', contact: '', message: '' })
+  const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const subject = encodeURIComponent(`Contact Form Message from ${formData.name}`)
-    const body = encodeURIComponent(`
-Name: ${formData.name}
-Email: ${formData.email}
-
-Message:
-${formData.message}
-
----
-Sent from Trust Technical Services website contact form
-    `)
-    const mailtoLink = `mailto:salaskjose@gmail.com?subject=${subject}&body=${body}`
-    window.location.href = mailtoLink
-    alert('Opening your email client to send the message...')
-    setFormData({ name: '', email: '', message: '' })
+    try {
+      setSubmitting(true)
+      const endpoint = process.env.NODE_ENV !== 'production' ? '/api/contact?debug=1' : '/api/contact'
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          contact: formData.contact,
+          description: formData.message,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        console.error('Contact submit failed:', data)
+        alert(data?.error || 'Failed to send your message. Please try again later.')
+        return
+      }
+      if (data.messageId) {
+        console.log('Mail sent', { messageId: data.messageId, accepted: data.accepted, rejected: data.rejected, response: data.response })
+      }
+      alert('Thanks! Your message has been sent successfully.')
+      setFormData({ name: '', email: '', contact: '', message: '' })
+    } catch (err) {
+      console.error('Contact submit error:', err)
+      alert('An unexpected error occurred. Please try again later.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleChange = (e) => {
@@ -330,10 +346,16 @@ Sent from Trust Technical Services website contact form
                     <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your.email@example.com" className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400" />
                   </div>
                   <div>
+                    <label htmlFor="contact" className="block text-sm font-medium text-white mb-1">Contact</label>
+                    <Input id="contact" name="contact" value={formData.contact} onChange={handleChange} placeholder="Optional phone or other contact info" className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400" />
+                  </div>
+                  <div>
                     <label htmlFor="message" className="block text-sm font-medium text-white mb-1">Message *</label>
                     <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell us about your project or requirements..." className="min-h-[120px] bg-gray-700 border-gray-600 text-white placeholder:text-gray-400" />
                   </div>
-                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white">Send Message</Button>
+                  <Button type="submit" disabled={submitting} className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                    {submitting ? 'Sending...' : 'Send Message'}
+                  </Button>
                 </form>
               </CardContent>
             </Card>
@@ -349,7 +371,7 @@ Sent from Trust Technical Services website contact form
                     <Phone className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Phone</h3>
-                      <p className="text-gray-300">+64 220980511</p>
+                      <p className="text-gray-300">022 098 0511</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
@@ -363,7 +385,7 @@ Sent from Trust Technical Services website contact form
                     <MapPin className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Address</h3>
-                      <p className="text-gray-300">20 Roslyn Farm Street<br />Drury 2579</p>
+                      <p className="text-gray-300">20 Roslyn Farm Street<br />Auckland 2579</p>
                     </div>
                   </div>
                 </CardContent>

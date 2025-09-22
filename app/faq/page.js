@@ -1,9 +1,9 @@
 'use client'
-
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+    {
+      question: "How can I contact your support team?",
+      answer:
+        "You can reach our support team via email at support@ttsnz.info or by phone at 022 098 0511. For in-person assistance, visit us at 20 Roslyn Farm Street, Auckland 2579.",
+    },
 
 function TrustLogo({ className = 'h-14 w-14' }) {
   return <img src="/image.png" alt="Trust Technical Services Logo" className={className} />
@@ -271,7 +271,7 @@ function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
             <p className="text-gray-400 text-sm">Email: salaskjose@gmail.com</p>
-            <p className="text-gray-400 text-sm">Phone: +64 22 150 3679</p>
+            <p className="text-gray-400 text-sm">Phone: 022 098 0511</p>
             <div className="mt-4">
               <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-orange-400 underline underline-offset-4">
                 Privacy Policy
@@ -299,7 +299,7 @@ function FAQContent() {
     {
       question: 'How can I contact you?',
       answer:
-        'You can reach us by phone at +64 220980511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579.',
+        'You can reach us by phone at 022 098 0511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Auckland 2579.',
     },
     {
       question: 'What are your business hours?',
