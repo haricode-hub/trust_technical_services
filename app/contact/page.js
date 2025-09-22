@@ -349,7 +349,7 @@ Sent from Trust Technical Services website contact form
                     <Phone className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Phone</h3>
-                      <p className="text-gray-300">+64 220980511</p>
+                      <p className="text-gray-300">022 098 0511</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">

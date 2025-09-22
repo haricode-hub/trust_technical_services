@@ -299,7 +299,7 @@ function FAQContent() {
     {
       question: 'How can I contact you?',
       answer:
-        'You can reach us by phone at +64 220980511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579.',
+        'You can reach us by phone at 022 098 0511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579.',
     },
     {
       question: 'What are your business hours?',
