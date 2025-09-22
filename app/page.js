@@ -482,7 +482,7 @@ function Footer({ onNavigate }) {
               <p>022 098 0511</p>
               <p className="break-all">salaskjose@gmail.com</p>
               <p>20 Roslyn Farm Street</p>
-              <p>Drury 2579</p>
+              <p>Auckland 2579</p>
             </div>
           </div>
         </div>
@@ -1456,7 +1456,7 @@ function FAQPage() {
     },
     {
       question: "How can I contact you?",
-      answer: "You can reach us by phone at 022 098 0511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579."
+      answer: "You can reach us by phone at +64 220980511, email at salaskjose@gmail.com, or visit us at 20 Roslyn Farm Street, Drury 2579."
     },
     {
       question: "What are your business hours?",
@@ -1662,7 +1662,7 @@ Sent from Trust Technical Services website contact form
                     <MapPin className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-white">Address</h3>
-                      <p className="text-gray-300">20 Roslyn Farm Street<br />Drury 2579</p>
+                      <p className="text-gray-300">20 Roslyn Farm Street<br />Auckland 2579</p>
                     </div>
                   </div>
                 </CardContent>
