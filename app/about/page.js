@@ -634,14 +634,12 @@ function AboutContent() {
                 key={index}
                 className="border border-gray-700 shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300"
               >
-                <CardContent>
-                  <div className="p-6 text-center">
-                    <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r ${area.color} flex items-center justify-center`}>
-                      <div className="text-white">{area.icon}</div>
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-4">{area.title}</h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">{area.description}</p>
+                <CardContent className="p-6 text-center">
+                  <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r ${area.color} flex items-center justify-center`}>
+                    <div className="text-white">{area.icon}</div>
                   </div>
+                  <h3 className="text-xl font-bold text-white mb-4">{area.title}</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">{area.description}</p>
                 </CardContent>
               </Card>
             ))}

@@ -216,7 +216,7 @@ function Navigation() {
                   key={item.id}
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
                     activeSection === item.id ? 'text-orange-400 bg-gray-800' : 'text-gray-300 hover:text-white hover:bg-gray-800'
                   }`}
                 >
@@ -229,7 +229,7 @@ function Navigation() {
                     goTo(item.id)
                     setIsMobileMenuOpen(false)
                   }}
-                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
                     activeSection === item.id ? 'text-orange-400 bg-gray-800' : 'text-gray-300 hover:text-white hover:bg-gray-800'
                   }`}
                 >
@@ -273,7 +273,7 @@ function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-orange-400 text-base">Contact</h3>
             <p className="text-gray-400 text-sm">Email: salaskjose@gmail.com</p>
-            <p className="text-gray-400 text-sm">Phone: +64 220980511</p>
+            <p className="text-gray-400 text-sm">Phone: 022 098 0511</p>
             <div className="mt-4">
               <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-orange-400 underline underline-offset-4">
                 Privacy Policy

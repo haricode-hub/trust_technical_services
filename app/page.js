@@ -383,7 +383,7 @@ function Navigation({ activeSection, onNavigate }) {
                   key={item.id}
                   href="/faq"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
                     activeSection === item.id
                       ? 'text-orange-400 bg-gray-800'
                       : 'text-gray-300 hover:text-white hover:bg-gray-800'
@@ -396,7 +396,7 @@ function Navigation({ activeSection, onNavigate }) {
                   key={item.id}
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
                     activeSection === item.id
                       ? 'text-orange-400 bg-gray-800'
                       : 'text-gray-300 hover:text-white hover:bg-gray-800'
@@ -411,7 +411,7 @@ function Navigation({ activeSection, onNavigate }) {
                     onNavigate(item.id)
                     setIsMobileMenuOpen(false)
                   }}
-                  className={`block w/full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`block w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
                     activeSection === item.id
                       ? 'text-orange-400 bg-gray-800'
                       : 'text-gray-300 hover:text-white hover:bg-gray-800'

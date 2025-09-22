@@ -1,9 +1,9 @@
 'use client'
-    {
-      question: "How can I contact your support team?",
-      answer:
-        "You can reach our support team via email at support@ttsnz.info or by phone at 022 098 0511. For in-person assistance, visit us at 20 Roslyn Farm Street, Auckland 2579.",
-    },
+
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 function TrustLogo({ className = 'h-14 w-14' }) {
   return <img src="/image.png" alt="Trust Technical Services Logo" className={className} />
