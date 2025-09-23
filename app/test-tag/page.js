@@ -538,14 +538,103 @@ function TestAndTagContent() {
 
   return (
     <div className="pt-20">
-      {/* Test and Tag Hero */}
-      <section className="py-20 bg-gradient-to-r from-gray-800 to-gray-900">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">Test and Tag Services</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto ">
-            Comprehensive electrical safety testing and compliance certification for all your equipment.
-          </p>
+      {/* Modern Hero Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-orange-500/5"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Main Heading */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Test and Tag 
+              <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"> Services</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Comprehensive electrical safety testing and compliance certification for all your equipment
+            </p>
+          </div>
+
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+            {/* Left Column - Quote */}
+            <div className="space-y-6">
+              <div className="flex items-start">
+                <svg className="w-10 h-10 text-orange-400/60 mr-4 mt-2 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+                </svg>
+                <blockquote className="text-2xl md:text-3xl font-bold text-white leading-relaxed">
+                  <span className="text-orange-400">"</span>
+                  Safety isn't an option, it's a standard. Get your appliances tested and tagged for complete peace of mind.
+                  <span className="text-orange-400">"</span>
+                </blockquote>
+              </div>
+              
+              {/* Additional Info */}
+              <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+                <div className="flex items-center space-x-4 text-gray-300">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-sm">Certified Professionals</span>
+                  </div>
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span className="text-sm">Fast Turnaround</span>
+                  </div>
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 text-orange-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span className="text-sm">Detailed Reports</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - CTA Button */}
+            <div className="flex flex-col items-center lg:items-start space-y-8">
+              <div className="text-center lg:text-left">
+                <h3 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  Contact our certified technicians today for professional electrical safety testing and compliance certification.
+                </p>
+              </div>
+              
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold px-12 py-6 text-xl shadow-2xl hover:from-orange-600 hover:to-orange-700 hover:scale-105 transform transition-all duration-300 rounded-2xl border border-orange-500/50 hover:shadow-orange-500/30 group"
+                >
+                  <svg className="w-6 h-6 mr-3 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  Contact Us for Service
+                </Button>
+              </Link>
+
+              {/* Trust Indicators */}
+              <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+                <div className="bg-gray-800/30 rounded-xl p-4 text-center border border-gray-700/30">
+                  <div className="text-2xl font-bold text-orange-400">24/7</div>
+                  <div className="text-sm text-gray-400">Support</div>
+                </div>
+                <div className="bg-gray-800/30 rounded-xl p-4 text-center border border-gray-700/30">
+                  <div className="text-2xl font-bold text-green-400">100%</div>
+                  <div className="text-sm text-gray-400">Compliant</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
+        {/* Decorative Grid */}
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-16"></div>
       </section>
 
       {/* Detailed Service Content */}
@@ -1182,18 +1271,7 @@ function TestAndTagContent() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-black text-center">
-        <div className="container mx-auto px-4">
-          <Button
-            size="lg"
-            className="bg-orange-500 text-white font-semibold px-8 sm:px-10 py-3 text-base sm:text-lg shadow-lg hover:bg-orange-600 hover:scale-105 transform transition-all duration-200 rounded-md border border-orange-600"
-            onClick={() => (window.location.href = '/contact')}
-          >
-            Contact Us for Service
-          </Button>
-        </div>
-      </section>
+
 
       {/* FAQ Videos Gallery (Embedded Playlist) */}
       <section id="faq" className="py-16 bg-black/95 border-t border-gray-800">
